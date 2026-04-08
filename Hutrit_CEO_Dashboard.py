@@ -1,79 +1,56 @@
 import streamlit as st
+import anthropic # Asegúrate de tenerlo en requirements.txt
 import os
 from pathlib import Path
 
-# Configuración de estética profesional navy/red como te gusta
-st.set_page_config(page_title="Hutrit Intelligence OS", layout="wide", page_icon="📈")
+# Configuración de página
+st.set_page_config(page_title="Hutrit Intelligence Chat", layout="centered", page_icon="🤖")
 
-# Estilo personalizado
-st.markdown("""
-    <style>
-    .main { background-color: #f0f2f6; }
-    .stButton>button { background-color: #202954; color: white; border-radius: 8px; }
-    </style>
-    """, unsafe_allow_html=True)
-
-st.title("Hutrit: Unified Command Center 🚀")
-
-# --- ESCANEO DINÁMICO DE HABILIDADES ---
-def escanear_agencia():
-    # Carpetas que contienen el "poder" de Hutrit
-    dominios = {
-        "ADS": "ads",
-        "SEO": "seo",
-        "RESEARCH": "research",
-        "SOCIAL": "social",
-        "SKILLS": ".claude/skills"
-    }
-    mapa = {}
-    for nombre, carpeta in dominios.items():
-        path = Path(carpeta)
+# --- MOTOR DE INTELIGENCIA ---
+def obtener_contexto_agencia():
+    # Esta función le dice a la IA qué archivos tienes disponibles
+    contexto = "Tienes acceso a las siguientes carpetas y habilidades en Hutrit:\n"
+    for folder in ["ads", "seo", "social", "research", ".claude/skills"]:
+        path = Path(folder)
         if path.exists():
-            # Filtramos solo archivos útiles (.py para scripts, .md para guías/prompts)
-            mapa[nombre] = [f for f in path.rglob("*") if f.suffix in [".py", ".md"]]
-    return mapa
+            files = [f.name for f in path.rglob("*") if f.suffix in [".py", ".md"]]
+            contexto += f"- {folder.upper()}: {', '.join(files)}\n"
+    return contexto
 
-# --- SIDEBAR: MAPA ESTRATÉGICO ---
-st.sidebar.image("https://www.hutrit.com/favicon.ico", width=80)
-st.sidebar.title("Hutrit OS")
-mapa_habilidades = escanear_agencia()
-
-for dominio, archivos in mapa_habilidades.items():
-    with st.sidebar.expander(f"📦 {dominio} ({len(archivos)})"):
-        for f in archivos:
-            st.write(f"📄 {f.name}")
-
-# --- PANEL DE CONTROL ---
-st.subheader("🤖 Ejecutor de Agentes")
-orden = st.text_area("¿Cuál es la misión de hoy?", placeholder="Ej: 'Genera una auditoría SEO para Hutrit Club' o 'Crea 5 copies para Meta Ads'...")
-
-# Selección de herramienta
-todas_las_skills = []
-for d in mapa_habilidades.values(): todas_las_skills.extend(d)
-
-habilidad_activa = st.selectbox("Selecciona la Skill a utilizar:", options=todas_las_skills, format_func=lambda x: f"{x.parent.name} / {x.name}")
-
-if st.button("🔥 ACTIVAR AGENTE"):
-    if orden:
-        st.info(f"Activando habilidad: **{habilidad_activa.name}**")
-        st.success(f"Procesando orden de Adam: '{orden}'")
-        # Aquí es donde ocurre la magia: conecta con la API de Claude o lanza el script
-        st.balloons()
-    else:
-        st.warning("Adam, necesito una orden clara para proceder.")
-
-# --- VISOR DE RESULTADOS ---
+# --- INTERFAZ ESTILO CHAT ---
+st.title("Hutrit Intelligence OS 🎙️")
 st.markdown("---")
-st.subheader("📂 Centro de Documentación")
-repo_folders = ["reports", "presentations", "ads"]
-docs = []
-for folder in repo_folders:
-    p = Path(folder)
-    if p.exists(): docs.extend([f for f in p.glob("*.md")])
 
-if docs:
-    doc_view = st.selectbox("Ver último entregable:", docs)
-    with open(doc_view, "r", encoding="utf-8") as f:
-        st.markdown(f.read())
-else:
-    st.write("Esperando ejecución de la primera misión...")
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+
+# Mostrar historial de chat
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
+
+# Entrada de texto (como Gemini/Claude)
+if prompt := st.chat_input("¿Qué misión ejecutamos hoy, Adam?"):
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    with st.chat_message("user"):
+        st.markdown(prompt)
+
+    # Respuesta de la IA
+    with st.chat_message("assistant"):
+        if "ANTHROPIC_API_KEY" in st.secrets:
+            client = anthropic.Anthropic(api_key=st.secrets["ANTHROPIC_API_KEY"])
+            contexto = obtener_contexto_agencia()
+            
+            # La IA decide qué hacer basándose en tus archivos reales
+            full_prompt = f"{contexto}\n\nOrden del usuario: {prompt}\n\nResponde como el sistema operativo de Hutrit. Di qué habilidades usarás y ejecuta el razonamiento."
+            
+            response = client.messages.create(
+                model="claude-3-5-sonnet-20241022",
+                max_tokens=1000,
+                messages=[{"role": "user", "content": full_prompt}]
+            )
+            respuesta_texto = response.content[0].text
+            st.markdown(respuesta_texto)
+            st.session_state.messages.append({"role": "assistant", "content": respuesta_texto})
+        else:
+            st.error("⚠️ Falta configurar la ANTHROPIC_API_KEY en Secrets de Streamlit.")
