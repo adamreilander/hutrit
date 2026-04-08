@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "social-creative",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "-l", "3456", "social"],
+      "port": 3456
+    }
+  ]
+}

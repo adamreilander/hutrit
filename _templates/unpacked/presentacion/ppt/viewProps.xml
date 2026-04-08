@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<p:viewPr xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" showComments="0" lastView="sldView">
+  
+  
+  <p:slideViewPr>
+    
+    
+    <p:cSldViewPr>
+      
+      
+      <p:cViewPr>
+        
+        
+        <p:scale>
+          
+          
+          <a:sx d="100" n="100"/>
+          
+          
+          <a:sy d="100" n="100"/>
+          
+        
+        </p:scale>
+        
+        
+        <p:origin x="0" y="0"/>
+        
+      
+      </p:cViewPr>
+      
+    
+    </p:cSldViewPr>
+    
+  
+  </p:slideViewPr>
+  
+
+</p:viewPr>

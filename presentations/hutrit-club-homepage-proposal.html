@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hutrit Club — Tu talento merece más</title>
+<link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --teal:    #004949;
+    --teal-mid:#006060;
+    --green:   #12A562;
+    --green-light: #e8f9f1;
+    --bg:      #F5F5F3;
+    --dark:    #1a1a1a;
+    --gray:    #3D3D3D;
+    --gray-light: #888;
+    --white:   #ffffff;
+    --radius:  14px;
+    --transition: 0.35s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Mulish', sans-serif;
+    background: var(--bg);
+    color: var(--gray);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── UTILITY ── */
+  .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'Mulish', sans-serif; font-weight: 700;
+    border-radius: 50px; border: none; cursor: pointer;
+    transition: var(--transition); text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+  .btn-primary {
+    background: var(--green); color: var(--white);
+    padding: 15px 32px; font-size: 1rem;
+    box-shadow: 0 4px 24px rgba(18,165,98,0.35);
+  }
+  .btn-primary:hover {
+    background: #0e9152;
+    box-shadow: 0 6px 32px rgba(18,165,98,0.5);
+    transform: translateY(-2px);
+  }
+  .btn-secondary {
+    background: transparent; color: var(--white);
+    padding: 14px 28px; font-size: 1rem;
+    border: 2px solid rgba(255,255,255,0.35);
+  }
+  .btn-secondary:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.7);
+  }
+  .btn-outline {
+    background: transparent; color: var(--teal);
+    padding: 14px 28px; font-size: 1rem;
+    border: 2px solid var(--teal);
+  }
+  .btn-outline:hover { background: var(--teal); color: var(--white); }
+  .tag {
+    display: inline-block; background: var(--green-light);
+    color: var(--green); font-size: 0.75rem; font-weight: 800;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 5px 14px; border-radius: 50px;
+  }
+
+  /* ── REVEAL ANIMATION ── */
+  .reveal {
+    opacity: 0; transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ══════════════════════════════════════
+     NAV
+  ══════════════════════════════════════ */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 18px 0;
+    transition: background 0.4s ease, box-shadow 0.4s ease;
+  }
+  nav.scrolled {
+    background: rgba(0,73,73,0.97);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 2px 24px rgba(0,0,0,0.2);
+  }
+  .nav-inner {
+    display: flex; align-items: center;
+    justify-content: space-between; gap: 32px;
+  }
+  .nav-logo {
+    font-size: 1.4rem; font-weight: 900;
+    text-decoration: none; display: flex; align-items: center; gap: 2px;
+  }
+  .nav-logo .logo-hutrit { color: var(--white); }
+  .nav-logo .logo-club   { color: var(--green); }
+  .nav-links {
+    display: flex; align-items: center; gap: 32px; list-style: none;
+  }
+  .nav-links a {
+    color: rgba(255,255,255,0.8); text-decoration: none;
+    font-size: 0.95rem; font-weight: 600;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta { display: flex; align-items: center; gap: 12px; }
+  .nav-cta .btn-primary { padding: 10px 22px; font-size: 0.9rem; }
+  .nav-mobile-toggle {
+    display: none; background: none; border: none;
+    cursor: pointer; flex-direction: column; gap: 5px;
+  }
+  .nav-mobile-toggle span {
+    display: block; width: 24px; height: 2px;
+    background: var(--white); border-radius: 2px;
+    transition: var(--transition);
+  }
+
+  /* ══════════════════════════════════════
+     HERO
+  ══════════════════════════════════════ */
+  #hero {
+    background: var(--teal);
+    padding: 160px 0 100px;
+    position: relative; overflow: hidden;
+    min-height: 100vh;
+    display: flex; align-items: center;
+  }
+
+  /* Animated mesh background */
+  #hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(18,165,98,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 20% 80%, rgba(18,165,98,0.1) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  /* Floating dots grid */
+  .hero-dots {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* Decorative circle */
+  .hero-circle {
+    position: absolute; right: -120px; top: 50%;
+    transform: translateY(-50%);
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    border: 1px solid rgba(18,165,98,0.2);
+    pointer-events: none;
+  }
+  .hero-circle::before {
+    content: '';
+    position: absolute; inset: 60px;
+    border-radius: 50%;
+    border: 1px solid rgba(18,165,98,0.15);
+  }
+  .hero-circle::after {
+    content: '';
+    position: absolute; inset: 120px;
+    border-radius: 50%;
+    background: rgba(18,165,98,0.05);
+    border: 1px solid rgba(18,165,98,0.12);
+  }
+
+  .hero-inner {
+    position: relative; z-index: 2;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 60px; align-items: center;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(18,165,98,0.15);
+    border: 1px solid rgba(18,165,98,0.3);
+    color: var(--green); font-size: 0.8rem; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 7px 16px; border-radius: 50px;
+    margin-bottom: 24px;
+  }
+  .hero-badge span { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+
+  .hero-headline {
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 900; line-height: 1.1;
+    color: var(--white); margin-bottom: 24px;
+    letter-spacing: -0.02em;
+  }
+  .hero-headline .accent { color: var(--green); }
+
+  .hero-sub {
+    font-size: 1.1rem; line-height: 1.7;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 40px; max-width: 480px;
+  }
+
+  .hero-cta-group {
+    display: flex; flex-wrap: wrap; gap: 14px;
+    align-items: center; margin-bottom: 52px;
+  }
+
+  .trust-bar {
+    display: flex; flex-wrap: wrap; gap: 20px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+  }
+  .trust-item {
+    display: flex; align-items: center; gap: 8px;
+    color: rgba(255,255,255,0.8); font-size: 0.85rem; font-weight: 600;
+  }
+  .trust-item svg { color: var(--green); flex-shrink: 0; }
+
+  /* Hero visual */
+  .hero-visual {
+    display: flex; justify-content: center; align-items: center;
+    position: relative;
+  }
+  .hero-card-main {
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 24px; padding: 32px;
+    width: 100%; max-width: 380px;
+    position: relative; z-index: 2;
+    animation: floatCard 6s ease-in-out infinite;
+  }
+  @keyframes floatCard { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+
+  .profile-header {
+    display: flex; align-items: center; gap: 16px; margin-bottom: 24px;
+  }
+  .profile-avatar {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--green), var(--teal-mid));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; font-weight: 900; color: white;
+    flex-shrink: 0;
+  }
+  .profile-name { color: var(--white); font-weight: 800; font-size: 1rem; }
+  .profile-role {
+    color: var(--green); font-size: 0.8rem; font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .profile-status {
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(18,165,98,0.15);
+    border: 1px solid rgba(18,165,98,0.3);
+    color: var(--green); font-size: 0.75rem; font-weight: 700;
+    padding: 5px 12px; border-radius: 50px;
+    margin-left: auto;
+  }
+  .profile-status::before {
+    content: ''; width: 7px; height: 7px;
+    background: var(--green); border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  .profile-stats {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px; margin-bottom: 20px;
+  }
+  .stat-box {
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px; padding: 14px 10px;
+    text-align: center;
+  }
+  .stat-box .num {
+    color: var(--white); font-size: 1.2rem; font-weight: 900; display: block;
+  }
+  .stat-box .lbl {
+    color: rgba(255,255,255,0.5); font-size: 0.7rem; font-weight: 600;
+    letter-spacing: 0.04em; text-transform: uppercase;
+  }
+
+  .match-notification {
+    background: rgba(18,165,98,0.12);
+    border: 1px solid rgba(18,165,98,0.25);
+    border-radius: 12px; padding: 14px 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .match-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: var(--green); display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .match-title { color: var(--white); font-size: 0.85rem; font-weight: 700; }
+  .match-sub { color: rgba(255,255,255,0.5); font-size: 0.75rem; }
+
+  /* Floating mini cards */
+  .float-card {
+    position: absolute; background: var(--white);
+    border-radius: 14px; padding: 12px 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    font-size: 0.8rem; font-weight: 700;
+    z-index: 3;
+  }
+  .float-card-1 {
+    top: -20px; left: -30px;
+    color: var(--teal); animation: floatCard 5s ease-in-out infinite reverse;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .float-card-1 .fc-icon {
+    width: 28px; height: 28px; background: var(--green-light);
+    border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+  }
+  .float-card-2 {
+    bottom: 20px; left: -40px;
+    color: var(--teal); animation: floatCard 7s ease-in-out infinite;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .float-card-2 .fc-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; }
+
+  /* ══════════════════════════════════════
+     PAIN
+  ══════════════════════════════════════ */
+  #pain {
+    background: #002e2e;
+    padding: 100px 0;
+    position: relative; overflow: hidden;
+  }
+  #pain::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--green), transparent);
+  }
+
+  .pain-inner {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+  }
+  .pain-label {
+    color: var(--green); font-size: 0.8rem; font-weight: 800;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .pain-headline {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 900; color: var(--white);
+    line-height: 1.15; margin-bottom: 28px;
+    letter-spacing: -0.02em;
+  }
+  .pain-sub {
+    color: rgba(255,255,255,0.6); line-height: 1.8;
+    font-size: 1rem; margin-bottom: 36px;
+  }
+  .pain-quote {
+    border-left: 3px solid var(--green);
+    padding: 16px 20px;
+    background: rgba(18,165,98,0.07);
+    border-radius: 0 12px 12px 0;
+    color: rgba(255,255,255,0.75);
+    font-style: italic; font-size: 1rem; line-height: 1.7;
+  }
+
+  .pain-cards { display: flex; flex-direction: column; gap: 16px; }
+  .pain-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px; padding: 22px 24px;
+    display: flex; align-items: flex-start; gap: 18px;
+    transition: var(--transition);
+  }
+  .pain-card:hover {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(18,165,98,0.2);
+    transform: translateX(6px);
+  }
+  .pain-card-icon {
+    width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+    background: rgba(18,165,98,0.12);
+    display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+  }
+  .pain-card-title { color: var(--white); font-weight: 800; font-size: 0.95rem; margin-bottom: 4px; }
+  .pain-card-text { color: rgba(255,255,255,0.5); font-size: 0.85rem; line-height: 1.6; }
+
+  /* ══════════════════════════════════════
+     HOW IT WORKS
+  ══════════════════════════════════════ */
+  #how {
+    background: var(--bg);
+    padding: 110px 0;
+  }
+  .section-header {
+    text-align: center; margin-bottom: 64px;
+  }
+  .section-headline {
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 900; color: var(--teal);
+    letter-spacing: -0.02em; margin-bottom: 16px;
+  }
+  .section-sub {
+    color: var(--gray-light); font-size: 1rem;
+    max-width: 520px; margin: 0 auto; line-height: 1.7;
+  }
+
+  .steps-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 24px; position: relative;
+  }
+  .steps-grid::before {
+    content: '';
+    position: absolute; top: 36px; left: 10%; right: 10%; height: 2px;
+    background: linear-gradient(90deg, var(--green), rgba(18,165,98,0.2));
+    z-index: 0;
+  }
+  .step-card {
+    background: var(--white);
+    border-radius: var(--radius); padding: 32px 24px;
+    text-align: center; position: relative; z-index: 1;
+    box-shadow: 0 2px 20px rgba(0,73,73,0.06);
+    transition: var(--transition);
+    border: 1px solid rgba(0,73,73,0.06);
+  }
+  .step-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0,73,73,0.12);
+    border-color: rgba(18,165,98,0.2);
+  }
+  .step-number {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--teal); color: var(--white);
+    font-size: 1.2rem; font-weight: 900;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+    box-shadow: 0 4px 16px rgba(0,73,73,0.3);
+  }
+  .step-icon { font-size: 2rem; margin-bottom: 16px; }
+  .step-title {
+    color: var(--teal); font-weight: 800; font-size: 1rem;
+    margin-bottom: 10px;
+  }
+  .step-text { color: var(--gray-light); font-size: 0.88rem; line-height: 1.6; }
+
+  /* ══════════════════════════════════════
+     ROLES
+  ══════════════════════════════════════ */
+  #roles {
+    background: var(--white);
+    padding: 110px 0;
+  }
+  .roles-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .role-card {
+    border-radius: 20px; padding: 36px 32px;
+    border: 1.5px solid rgba(0,73,73,0.1);
+    background: var(--bg);
+    transition: var(--transition);
+    position: relative; overflow: hidden;
+    cursor: pointer;
+  }
+  .role-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: var(--green);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .role-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,73,73,0.12); }
+  .role-card:hover::before { transform: scaleX(1); }
+  .role-card:hover { border-color: rgba(18,165,98,0.3); }
+
+  .role-icon {
+    width: 60px; height: 60px; border-radius: 16px;
+    background: var(--teal); color: var(--white);
+    font-size: 1.5rem;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 16px rgba(0,73,73,0.25);
+  }
+  .role-title {
+    font-size: 1.25rem; font-weight: 900; color: var(--teal);
+    margin-bottom: 10px;
+  }
+  .role-desc {
+    color: var(--gray-light); font-size: 0.9rem; line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  .role-skills {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;
+  }
+  .skill-tag {
+    background: var(--green-light); color: var(--green);
+    font-size: 0.75rem; font-weight: 700;
+    padding: 5px 12px; border-radius: 50px;
+  }
+  .role-salary {
+    display: flex; align-items: center; gap: 8px;
+    padding-top: 20px; border-top: 1px solid rgba(0,73,73,0.08);
+  }
+  .salary-label { color: var(--gray-light); font-size: 0.8rem; font-weight: 600; }
+  .salary-range { color: var(--teal); font-weight: 900; font-size: 1rem; }
+  .salary-badge {
+    margin-left: auto; background: var(--green); color: white;
+    font-size: 0.7rem; font-weight: 800;
+    padding: 3px 10px; border-radius: 50px;
+    letter-spacing: 0.04em;
+  }
+
+  /* ══════════════════════════════════════
+     SOCIAL PROOF
+  ══════════════════════════════════════ */
+  #proof { background: var(--bg); padding: 100px 0; }
+
+  .stats-bar {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 2px; background: rgba(0,73,73,0.08);
+    border-radius: 20px; overflow: hidden; margin-bottom: 72px;
+  }
+  .stat-item {
+    background: var(--white); padding: 36px 24px;
+    text-align: center;
+    transition: var(--transition);
+  }
+  .stat-item:hover { background: var(--teal); }
+  .stat-item:hover .stat-num { color: var(--white); }
+  .stat-item:hover .stat-lbl { color: rgba(255,255,255,0.7); }
+  .stat-num {
+    font-size: 2.4rem; font-weight: 900; color: var(--teal);
+    display: block; line-height: 1; margin-bottom: 8px;
+    letter-spacing: -0.03em; transition: color 0.35s;
+  }
+  .stat-lbl { color: var(--gray-light); font-size: 0.85rem; font-weight: 600; transition: color 0.35s; }
+
+  .testimonials-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  }
+  .testimonial-card {
+    background: var(--white); border-radius: var(--radius);
+    padding: 32px; border: 1px solid rgba(0,73,73,0.07);
+    transition: var(--transition);
+    position: relative;
+  }
+  .testimonial-card:hover {
+    box-shadow: 0 12px 40px rgba(0,73,73,0.1);
+    transform: translateY(-4px);
+  }
+  .quote-mark {
+    font-size: 3rem; line-height: 0.5; color: var(--green);
+    opacity: 0.3; font-family: Georgia, serif;
+    margin-bottom: 16px; display: block;
+  }
+  .testimonial-text {
+    color: var(--gray); font-size: 0.95rem; line-height: 1.75;
+    margin-bottom: 28px;
+  }
+  .testimonial-author { display: flex; align-items: center; gap: 14px; }
+  .author-avatar {
+    width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--teal), var(--green));
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-weight: 900; font-size: 1rem;
+  }
+  .author-name { color: var(--teal); font-weight: 800; font-size: 0.9rem; }
+  .author-info { color: var(--gray-light); font-size: 0.8rem; }
+
+  /* ══════════════════════════════════════
+     COMMUNITY
+  ══════════════════════════════════════ */
+  #community {
+    background: var(--teal);
+    padding: 100px 0; position: relative; overflow: hidden;
+  }
+  #community::after {
+    content: '';
+    position: absolute; right: -100px; bottom: -100px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: rgba(18,165,98,0.08);
+    border: 1px solid rgba(18,165,98,0.12);
+  }
+  .community-inner {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+    position: relative; z-index: 2;
+  }
+  .community-headline {
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 900; color: var(--white);
+    letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 20px;
+  }
+  .community-headline .accent { color: var(--green); }
+  .community-sub {
+    color: rgba(255,255,255,0.65); line-height: 1.8; font-size: 1rem;
+    margin-bottom: 36px;
+  }
+  .community-features { display: flex; flex-direction: column; gap: 16px; }
+  .community-feat {
+    display: flex; align-items: center; gap: 14px;
+    color: rgba(255,255,255,0.85); font-size: 0.95rem; font-weight: 600;
+  }
+  .community-feat-icon {
+    width: 36px; height: 36px; background: rgba(18,165,98,0.2);
+    border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0;
+  }
+
+  .community-visual { display: flex; flex-direction: column; gap: 16px; }
+  .member-row {
+    display: flex; align-items: center; gap: 14px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px; padding: 16px 20px;
+    transition: var(--transition);
+  }
+  .member-row:hover {
+    background: rgba(255,255,255,0.09);
+    border-color: rgba(18,165,98,0.2);
+    transform: translateX(6px);
+  }
+  .member-avatar {
+    width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; color: white; font-size: 0.95rem;
+  }
+  .member-name { color: var(--white); font-weight: 700; font-size: 0.9rem; }
+  .member-detail { color: rgba(255,255,255,0.5); font-size: 0.78rem; }
+  .member-badge {
+    margin-left: auto; background: rgba(18,165,98,0.2);
+    border: 1px solid rgba(18,165,98,0.3);
+    color: var(--green); font-size: 0.72rem; font-weight: 700;
+    padding: 4px 12px; border-radius: 50px;
+    white-space: nowrap;
+  }
+
+  /* ══════════════════════════════════════
+     FINAL CTA
+  ══════════════════════════════════════ */
+  #cta-final {
+    background: var(--bg); padding: 120px 0;
+    text-align: center;
+  }
+  .cta-card {
+    background: var(--teal);
+    border-radius: 28px; padding: 80px 60px;
+    max-width: 860px; margin: 0 auto;
+    position: relative; overflow: hidden;
+  }
+  .cta-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 80% 50%, rgba(18,165,98,0.2) 0%, transparent 60%);
+  }
+  .cta-headline {
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    font-weight: 900; color: var(--white);
+    letter-spacing: -0.025em; line-height: 1.15;
+    margin-bottom: 20px; position: relative;
+  }
+  .cta-sub {
+    color: rgba(255,255,255,0.65); font-size: 1.05rem;
+    max-width: 500px; margin: 0 auto 44px; line-height: 1.7;
+    position: relative;
+  }
+  .cta-group {
+    display: flex; justify-content: center;
+    flex-wrap: wrap; gap: 16px; position: relative;
+  }
+  .cta-card .btn-primary { font-size: 1.05rem; padding: 17px 40px; }
+  .cta-disclaimer {
+    margin-top: 24px; color: rgba(255,255,255,0.4);
+    font-size: 0.8rem; position: relative;
+  }
+
+  /* ══════════════════════════════════════
+     FOOTER
+  ══════════════════════════════════════ */
+  footer {
+    background: #001e1e; padding: 52px 0 32px; color: rgba(255,255,255,0.5);
+  }
+  .footer-inner {
+    display: flex; justify-content: space-between;
+    align-items: center; flex-wrap: wrap; gap: 24px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    margin-bottom: 28px;
+  }
+  .footer-logo { font-size: 1.2rem; font-weight: 900; text-decoration: none; }
+  .footer-logo .logo-hutrit { color: var(--white); }
+  .footer-logo .logo-club   { color: var(--green); }
+  .footer-links { display: flex; gap: 28px; flex-wrap: wrap; }
+  .footer-links a {
+    color: rgba(255,255,255,0.5); text-decoration: none;
+    font-size: 0.875rem; font-weight: 600; transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--white); }
+  .footer-socials { display: flex; gap: 12px; }
+  .social-btn {
+    width: 38px; height: 38px; border-radius: 10px;
+    background: rgba(255,255,255,0.07);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.5); text-decoration: none;
+    font-size: 0.85rem; font-weight: 700; transition: var(--transition);
+  }
+  .social-btn:hover { background: var(--green); color: white; }
+  .footer-bottom {
+    display: flex; justify-content: space-between;
+    align-items: center; flex-wrap: wrap; gap: 12px;
+  }
+  .footer-copy { font-size: 0.82rem; }
+  .footer-legal { display: flex; gap: 20px; }
+  .footer-legal a {
+    color: rgba(255,255,255,0.4); text-decoration: none;
+    font-size: 0.8rem; transition: color 0.2s;
+  }
+  .footer-legal a:hover { color: var(--white); }
+
+  /* ══════════════════════════════════════
+     RESPONSIVE
+  ══════════════════════════════════════ */
+  @media (max-width: 1024px) {
+    .steps-grid { grid-template-columns: repeat(2, 1fr); }
+    .steps-grid::before { display: none; }
+    .roles-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .pain-inner { grid-template-columns: 1fr; }
+    .community-inner { grid-template-columns: 1fr; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .roles-grid { grid-template-columns: 1fr; }
+    .steps-grid { grid-template-columns: 1fr; }
+    .nav-links, .nav-cta { display: none; }
+    .nav-mobile-toggle { display: flex; }
+    .cta-card { padding: 48px 28px; }
+    .footer-inner { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <span class="logo-hutrit">Hutrit</span><span class="logo-club">&nbsp;Club</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#how">Cómo funciona</a></li>
+        <li><a href="#roles">Roles</a></li>
+        <li><a href="#community">Comunidad</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="#cta-final" class="btn btn-primary">Únete gratis</a>
+      </div>
+      <button class="nav-mobile-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-dots"></div>
+  <div class="hero-circle"></div>
+  <div class="container">
+    <div class="hero-inner">
+
+      <div class="hero-content">
+        <div class="hero-badge reveal">
+          <span></span> Ahora reclutando en LATAM
+        </div>
+        <h1 class="hero-headline reveal reveal-delay-1">
+          Tu talento ya vale<br>
+          <span class="accent">a nivel internacional</span>
+        </h1>
+        <p class="hero-sub reveal reveal-delay-2">
+          Hutrit Club conecta a profesionales latinoamericanos con empresas europeas que buscan exactamente lo que tú sabes hacer — con proceso claro, acompañamiento real y compensación en USD.
+        </p>
+        <div class="hero-cta-group reveal reveal-delay-3">
+          <a href="#cta-final" class="btn btn-primary">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+            Crea tu perfil gratis
+          </a>
+          <a href="#how" class="btn btn-secondary">Cómo funciona</a>
+        </div>
+        <div class="trust-bar reveal reveal-delay-4">
+          <div class="trust-item">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            Gratis para talento
+          </div>
+          <div class="trust-item">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            Empresas verificadas
+          </div>
+          <div class="trust-item">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            Proceso acompañado
+          </div>
+          <div class="trust-item">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            100% remoto
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Visual / Card -->
+      <div class="hero-visual reveal reveal-delay-2">
+        <div class="float-card float-card-1">
+          <div class="fc-icon">🚀</div>
+          <div>
+            <div style="color:var(--teal);font-weight:800;font-size:0.8rem;">Match encontrado</div>
+            <div style="color:#888;font-size:0.72rem;">Empresa en Madrid</div>
+          </div>
+        </div>
+        <div class="float-card float-card-2">
+          <div class="fc-dot"></div>
+          <div style="color:var(--teal);font-weight:700">+50 empresas activas</div>
+        </div>
+        <div class="hero-card-main">
+          <div class="profile-header">
+            <div class="profile-avatar">A</div>
+            <div>
+              <div class="profile-name">Alejandro M.</div>
+              <div class="profile-role">Appointment Setter</div>
+            </div>
+            <div class="profile-status">Activo</div>
+          </div>
+          <div class="profile-stats">
+            <div class="stat-box">
+              <span class="num">B2+</span>
+              <span class="lbl">Inglés</span>
+            </div>
+            <div class="stat-box">
+              <span class="num">5</span>
+              <span class="lbl">Años exp.</span>
+            </div>
+            <div class="stat-box">
+              <span class="num">3</span>
+              <span class="lbl">Ofertas</span>
+            </div>
+          </div>
+          <div class="match-notification">
+            <div class="match-icon">
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <div>
+              <div class="match-title">Proceso completado</div>
+              <div class="match-sub">Empieza en 2 semanas · €1,800/mes</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ PAIN ══ -->
+<section id="pain">
+  <div class="container">
+    <div class="pain-inner">
+      <div class="reveal">
+        <div class="pain-label">El problema real</div>
+        <h2 class="pain-headline">El problema<br>que nadie nombra</h2>
+        <p class="pain-sub">
+          No es que te falte talento. No es que no estés preparado. Es que el mercado local simplemente no puede pagarte lo que vales — y las oportunidades internacionales parecen reservadas para otros.
+        </p>
+        <blockquote class="pain-quote">
+          "Apliqué a 30 ofertas remotas. La mitad eran estafas. La otra mitad nunca respondió. Sentí que trabajar para una empresa europea era un sueño imposible."
+          <br><br><strong style="color:rgba(255,255,255,0.7);font-style:normal">— Perfil típico de Hutrit Club</strong>
+        </blockquote>
+      </div>
+      <div class="pain-cards reveal reveal-delay-1">
+        <div class="pain-card">
+          <div class="pain-card-icon">💸</div>
+          <div>
+            <div class="pain-card-title">Techo salarial local</div>
+            <div class="pain-card-text">Tu habilidad vale mucho más de lo que el mercado local puede ofrecerte. El problema no eres tú.</div>
+          </div>
+        </div>
+        <div class="pain-card">
+          <div class="pain-card-icon">🚫</div>
+          <div>
+            <div class="pain-card-title">Ofertas que no son reales</div>
+            <div class="pain-card-text">Plataformas llenas de vacantes fantasma, procesos que nunca responden y promesas vacías que generan desconfianza.</div>
+          </div>
+        </div>
+        <div class="pain-card">
+          <div class="pain-card-icon">🔒</div>
+          <div>
+            <div class="pain-card-title">Sin camino claro</div>
+            <div class="pain-card-text">Nadie te enseña exactamente cómo acceder al trabajo remoto internacional. No hay proceso, no hay guía, no hay comunidad.</div>
+          </div>
+        </div>
+        <div class="pain-card" style="border-color: rgba(18,165,98,0.3); background: rgba(18,165,98,0.08);">
+          <div class="pain-card-icon" style="background: rgba(18,165,98,0.2);">✅</div>
+          <div>
+            <div class="pain-card-title" style="color:var(--green)">Hutrit Club lo resuelve</div>
+            <div class="pain-card-text">Proceso claro, empresas verificadas, acompañamiento real y una comunidad que ya está del otro lado.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ HOW IT WORKS ══ -->
+<section id="how">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="tag" style="margin-bottom:16px">El proceso</div>
+      <h2 class="section-headline">Sin misterios. Sin vueltas.</h2>
+      <p class="section-sub">Cuatro pasos para pasar de donde estás hoy a trabajar con una empresa europea.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card reveal">
+        <div class="step-number">1</div>
+        <div class="step-icon">📋</div>
+        <div class="step-title">Crea tu perfil</div>
+        <p class="step-text">En menos de 10 minutos. Cuéntanos tu experiencia, inglés y disponibilidad. Gratis, sin compromisos.</p>
+      </div>
+      <div class="step-card reveal reveal-delay-1">
+        <div class="step-number">2</div>
+        <div class="step-icon">🎯</div>
+        <div class="step-title">Pasás nuestro proceso</div>
+        <p class="step-text">Una evaluación breve y una entrevista en video. Transparente, sin sorpresas. Te decimos qué esperamos en cada paso.</p>
+      </div>
+      <div class="step-card reveal reveal-delay-2">
+        <div class="step-number">3</div>
+        <div class="step-icon">🤝</div>
+        <div class="step-title">Te conectamos</div>
+        <p class="step-text">Nuestro equipo te presenta a empresas europeas que encajan con tu perfil. Nosotros gestionamos el match.</p>
+      </div>
+      <div class="step-card reveal reveal-delay-3">
+        <div class="step-number">4</div>
+        <div class="step-icon">🚀</div>
+        <div class="step-title">Empezás a trabajar</div>
+        <p class="step-text">Promedio de 3 semanas desde tu perfil al primer día. Full-time, remoto, con compensación real en USD.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ROLES ══ -->
+<section id="roles">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="tag" style="margin-bottom:16px">Roles disponibles</div>
+      <h2 class="section-headline">¿Con qué perfil trabajamos?</h2>
+      <p class="section-sub">Roles de alto impacto en ventas y operaciones para empresas europeas en crecimiento.</p>
+    </div>
+    <div class="roles-grid">
+      <div class="role-card reveal">
+        <div class="role-icon">📞</div>
+        <div class="role-title">Appointment Setter</div>
+        <p class="role-desc">Eres el primer contacto entre la empresa y sus prospectos. Tu objetivo: convertir interés en reuniones concretas con el equipo de ventas.</p>
+        <div class="role-skills">
+          <span class="skill-tag">Outbound</span>
+          <span class="skill-tag">CRM</span>
+          <span class="skill-tag">Comunicación</span>
+          <span class="skill-tag">Inglés B2+</span>
+        </div>
+        <div class="role-salary">
+          <div>
+            <div class="salary-label">Compensación mensual</div>
+            <div class="salary-range">$800 — $1,500 USD</div>
+          </div>
+          <div class="salary-badge">USD</div>
+        </div>
+      </div>
+      <div class="role-card reveal reveal-delay-1">
+        <div class="role-icon">🔍</div>
+        <div class="role-title">Lead Qualifier</div>
+        <p class="role-desc">Evalúas y clasificas prospectos para determinar su potencial real. Eres el filtro estratégico que hace que el equipo de ventas cierre más.</p>
+        <div class="role-skills">
+          <span class="skill-tag">Análisis</span>
+          <span class="skill-tag">Ventas B2B</span>
+          <span class="skill-tag">Prospección</span>
+          <span class="skill-tag">Inglés C1</span>
+        </div>
+        <div class="role-salary">
+          <div>
+            <div class="salary-label">Compensación mensual</div>
+            <div class="salary-range">$1,200 — $2,200 USD</div>
+          </div>
+          <div class="salary-badge">USD</div>
+        </div>
+      </div>
+      <div class="role-card reveal reveal-delay-2">
+        <div class="role-icon">🧭</div>
+        <div class="role-title">Hiring Advisor</div>
+        <p class="role-desc">Trabajas dentro del equipo de Hutrit asesorando a empresas en sus procesos de contratación y coordinando la conexión con talento LATAM.</p>
+        <div class="role-skills">
+          <span class="skill-tag">RRHH</span>
+          <span class="skill-tag">Coordinación</span>
+          <span class="skill-tag">Comunicación</span>
+          <span class="skill-tag">Inglés B2+</span>
+        </div>
+        <div class="role-salary">
+          <div>
+            <div class="salary-label">Compensación mensual</div>
+            <div class="salary-range">$1,000 — $1,800 USD</div>
+          </div>
+          <div class="salary-badge">USD</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SOCIAL PROOF ══ -->
+<section id="proof">
+  <div class="container">
+    <div class="stats-bar reveal">
+      <div class="stat-item">
+        <span class="stat-num">+4</span>
+        <span class="stat-lbl">Países de talento</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">+50</span>
+        <span class="stat-lbl">Empresas activas</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">3 sem.</span>
+        <span class="stat-lbl">Tiempo promedio</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">100%</span>
+        <span class="stat-lbl">Trabajo remoto</span>
+      </div>
+    </div>
+
+    <div class="section-header reveal">
+      <h2 class="section-headline">Ellos ya dieron el paso</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <span class="quote-mark">"</span>
+        <p class="testimonial-text">Llevaba dos años buscando trabajo remoto en serio. Con Hutrit Club el proceso fue completamente diferente: transparente, rápido y sin ghosting. En tres semanas ya estaba en onboarding.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">C</div>
+          <div>
+            <div class="author-name">Carlos M.</div>
+            <div class="author-info">Appointment Setter · Caracas, Venezuela</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-1">
+        <span class="quote-mark">"</span>
+        <p class="testimonial-text">Lo que más me sorprendió fue el acompañamiento. No te dejan solo en ningún paso. Ahora trabajo con una empresa en Barcelona y gano cinco veces más que en mi trabajo local anterior.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">V</div>
+          <div>
+            <div class="author-name">Valeria R.</div>
+            <div class="author-info">Lead Qualifier · Buenos Aires, Argentina</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-2">
+        <span class="quote-mark">"</span>
+        <p class="testimonial-text">Me daba miedo que fuera otra estafa más. Pero las empresas son reales, el proceso es claro y el equipo de Hutrit está presente en cada etapa. Ojalá lo hubiera conocido antes.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">S</div>
+          <div>
+            <div class="author-name">Sebastián T.</div>
+            <div class="author-info">Hiring Advisor · Bogotá, Colombia</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ COMMUNITY ══ -->
+<section id="community">
+  <div class="container">
+    <div class="community-inner">
+      <div class="reveal">
+        <div class="tag" style="margin-bottom:20px">La comunidad</div>
+        <h2 class="community-headline">No estás solo<br><span class="accent">en esto</span></h2>
+        <p class="community-sub">Hutrit Club no es solo una plataforma de empleo. Es una red de profesionales LATAM que comparten el mismo camino — con recursos, apoyo y personas que ya están del otro lado.</p>
+        <div class="community-features">
+          <div class="community-feat">
+            <div class="community-feat-icon">💬</div>
+            Red activa de miembros que comparten experiencias reales
+          </div>
+          <div class="community-feat">
+            <div class="community-feat-icon">📚</div>
+            Recursos para prepararte: inglés, entrevistas, perfil
+          </div>
+          <div class="community-feat">
+            <div class="community-feat-icon">🎯</div>
+            Mentores que ya trabajan en empresas europeas
+          </div>
+          <div class="community-feat">
+            <div class="community-feat-icon">🔔</div>
+            Alertas de nuevas oportunidades antes que nadie
+          </div>
+        </div>
+      </div>
+      <div class="community-visual reveal reveal-delay-1">
+        <div class="member-row">
+          <div class="member-avatar" style="background: linear-gradient(135deg,#004949,#12A562)">M</div>
+          <div>
+            <div class="member-name">María G. — Lima, Perú</div>
+            <div class="member-detail">Lead Qualifier · Empresa en Madrid</div>
+          </div>
+          <div class="member-badge">✓ Colocada</div>
+        </div>
+        <div class="member-row">
+          <div class="member-avatar" style="background: linear-gradient(135deg,#006060,#004949)">R</div>
+          <div>
+            <div class="member-name">Ricardo P. — Caracas, Venezuela</div>
+            <div class="member-detail">Appointment Setter · Empresa en Barcelona</div>
+          </div>
+          <div class="member-badge">✓ Colocado</div>
+        </div>
+        <div class="member-row">
+          <div class="member-avatar" style="background: linear-gradient(135deg,#12A562,#006060)">L</div>
+          <div>
+            <div class="member-name">Laura S. — Buenos Aires, Argentina</div>
+            <div class="member-detail">Hiring Advisor · Equipo Hutrit</div>
+          </div>
+          <div class="member-badge">✓ Colocada</div>
+        </div>
+        <div class="member-row">
+          <div class="member-avatar" style="background: linear-gradient(135deg,#004949,#006060)">D</div>
+          <div>
+            <div class="member-name">Diego C. — Bogotá, Colombia</div>
+            <div class="member-detail">En proceso · Entrevista esta semana</div>
+          </div>
+          <div class="member-badge" style="background: rgba(255,165,0,0.15); border-color: rgba(255,165,0,0.3); color: #ffad33;">En curso</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FINAL CTA ══ -->
+<section id="cta-final">
+  <div class="container">
+    <div class="cta-card reveal">
+      <h2 class="cta-headline">¿Listo para tu próximo nivel?</h2>
+      <p class="cta-sub">Tu experiencia ya tiene valor internacional. Solo necesitás el acceso correcto y un proceso que funcione.</p>
+      <div class="cta-group">
+        <a href="#" class="btn btn-primary">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+          Crea tu perfil gratis
+        </a>
+        <a href="#how" class="btn btn-secondary">Ver cómo funciona</a>
+      </div>
+      <p class="cta-disclaimer">Sin costo · Sin compromisos · Respuesta en 48 horas</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <a href="#" class="footer-logo">
+        <span class="logo-hutrit">Hutrit</span><span class="logo-club">&nbsp;Club</span>
+      </a>
+      <div class="footer-links">
+        <a href="#how">Cómo funciona</a>
+        <a href="#roles">Roles</a>
+        <a href="#community">Comunidad</a>
+        <a href="#">Para empresas</a>
+      </div>
+      <div class="footer-socials">
+        <a href="#" class="social-btn" title="Instagram">IG</a>
+        <a href="#" class="social-btn" title="LinkedIn">in</a>
+        <a href="#" class="social-btn" title="WhatsApp">WA</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Hutrit Club. Todos los derechos reservados.</span>
+      <div class="footer-legal">
+        <a href="#">Privacidad</a>
+        <a href="#">Términos</a>
+        <a href="#">Contacto</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Trigger hero reveals immediately
+  document.querySelectorAll('#hero .reveal').forEach(el => {
+    setTimeout(() => el.classList.add('visible'), 200);
+  });
+
+  // Smooth scroll for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Animated counters
+  function animateCounter(el, target, suffix = '') {
+    const duration = 1800;
+    const start = performance.now();
+    const update = (time) => {
+      const progress = Math.min((time - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.floor(eased * target) + suffix;
+      if (progress < 1) requestAnimationFrame(update);
+    };
+    requestAnimationFrame(update);
+  }
+
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const nums = e.target.querySelectorAll('.stat-num');
+        nums.forEach(n => {
+          const text = n.textContent;
+          if (text.includes('+4')) animateCounter(n, 4, '+');
+          else if (text.includes('+50')) animateCounter(n, 50, '+');
+        });
+        statsObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  const statsBar = document.querySelector('.stats-bar');
+  if (statsBar) statsObserver.observe(statsBar);
+</script>
+</body>
+</html>

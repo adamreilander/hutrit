@@ -1,0 +1,15 @@
+﻿"Nombre de la campaña","Estado de la entrega","Nivel de la entrega","Tipo de resultado",Resultados,"Costo por resultado","Importe gastado (EUR)",Impresiones,Alcance,"Configuración de atribución","Clasificación de calidad","Clasificación del porcentaje de interacción","Clasificación del porcentaje de conversiones","Nombre del conjunto de anuncios","Inicio del informe","Fin del informe"
+"Paid Media",inactive,campaign,"Visitas a la página de destino",1652,0.0416586,68.82,65486,37074,"7 días tras clic o 1 día tras visualización",-,-,-,,2026-02-28,2026-03-29
+"Sales Development 2",active,campaign,"Visitas a la página de destino",6392,0.00935388,59.79,117961,58205,"7 días tras clic o 1 día tras visualización",-,-,-,,2026-02-28,2026-03-29
+"Sales Development",inactive,campaign,"Visitas a la página de destino",1647,0.01282939,21.13,42369,28010,"7 días tras clic o 1 día tras visualización",-,-,-,,2026-02-28,2026-03-29
+"Campaña Tech nueva",inactive,campaign,"Visitas a la página de destino",1355,0.01548339,20.98,33403,26890,"7 días tras clic o 1 día tras visualización",-,-,-,,2026-02-28,2026-03-29
+"Director Comercial",inactive,campaign,"Visitas a la página de destino",1916,0.0109238,20.93,36874,24056,"7 días tras clic o 1 día tras visualización",-,-,-,,2026-02-28,2026-03-29
+"Campaña Project Manager",inactive,campaign,"Visitas a la página de destino",879,0.01891923,16.63,23238,16121,"7 días tras clic o 1 día tras visualización",-,-,-,,2026-02-28,2026-03-29
+"SEO Campaing",inactive,campaign,"Visitas a la página de destino",750,0.02130667,15.98,19301,13926,"7 días tras clic o 1 día tras visualización",-,-,-,,2026-02-28,2026-03-29
+"Apolo energies",inactive,campaign,"Visitas a la página de destino",554,0.02232852,12.37,23615,17329,"7 días tras clic o 1 día tras visualización",-,-,-,,2026-02-28,2026-03-29
+"Automation Expert",inactive,campaign,"Visitas a la página de destino",521,0.02301344,11.99,12653,9118,"7 días tras clic o 1 día tras visualización",-,-,-,,2026-02-28,2026-03-29
+Cyber,inactive,campaign,"Visitas a la página de destino",404,0.02420792,9.78,10207,6534,"7 días tras clic o 1 día tras visualización",-,-,-,,2026-02-28,2026-03-29
+"Campaña IA",active,campaign,"Visitas a la página de destino",664,0.01213855,8.06,14561,10745,-,-,-,-,,2026-02-28,2026-03-29
+"Talentoa Consultores",inactive,campaign,"Visitas a la página de destino",294,0.01867347,5.49,6606,5165,"7 días tras clic o 1 día tras visualización",-,-,-,,2026-02-28,2026-03-29
+"Campaing South Africa TECH",inactive,campaign,"Visitas a la página de destino",143,0.02118881,3.03,5158,4714,"7 días tras clic o 1 día tras visualización",-,-,-,,2026-02-28,2026-03-29
+DEVOPS,active,campaign,"Visitas a la página de destino",148,0.02033784,3.01,3315,3055,"7 días tras clic o 1 día tras visualización",-,-,-,,2026-02-28,2026-03-29

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="rId1" Target="slideMasters/slideMaster1.xml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideMaster"/>
+  
+  <Relationship Id="rId100" Target="fonts/font100.fntdata" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/font"/>
+  <Relationship Id="rId101" Target="fonts/font101.fntdata" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/font"/>
+  <Relationship Id="rId102" Target="fonts/font102.fntdata" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/font"/>
+  <Relationship Id="rId103" Target="fonts/font103.fntdata" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/font"/>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <Relationship Id="rId2" Target="presProps.xml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/presProps"/>
+  <Relationship Id="rId20" Target="slides/slide15.xml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slide"/>
+  <Relationship Id="rId21" Target="slides/slide16.xml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slide"/>
+  <Relationship Id="rId22" Target="slides/slide17.xml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slide"/>
+  <Relationship Id="rId23" Target="slides/slide18.xml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slide"/>
+  <Relationship Id="rId24" Target="slides/slide19.xml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slide"/>
+  
+  
+  
+  
+  
+  <Relationship Id="rId3" Target="viewProps.xml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/viewProps"/>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <Relationship Id="rId4" Target="theme/theme1.xml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme"/>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <Relationship Id="rId5" Target="tableStyles.xml" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/tableStyles"/>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <Relationship Id="rId104" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slide" Target="slides/slide95.xml"/>
+</Relationships>

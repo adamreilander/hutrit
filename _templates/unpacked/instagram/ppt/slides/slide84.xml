@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<p:sld xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+  <p:cSld>
+    <p:spTree>
+      <p:nvGrpSpPr>
+        <p:cNvPr id="1" name=""/>
+        <p:cNvGrpSpPr/>
+        <p:nvPr/>
+      </p:nvGrpSpPr>
+      <p:grpSpPr>
+        <a:xfrm>
+          <a:off x="0" y="0"/>
+          <a:ext cx="0" cy="0"/>
+          <a:chOff x="0" y="0"/>
+          <a:chExt cx="0" cy="0"/>
+        </a:xfrm>
+      </p:grpSpPr>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr name="Freeform 2" id="2"/>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm flipH="false" flipV="false" rot="0">
+            <a:off x="0" y="0"/>
+            <a:ext cx="10287000" cy="12858750"/>
+          </a:xfrm>
+          <a:custGeom>
+            <a:avLst/>
+            <a:gdLst/>
+            <a:ahLst/>
+            <a:cxnLst/>
+            <a:rect r="r" b="b" t="t" l="l"/>
+            <a:pathLst>
+              <a:path h="12858750" w="10287000">
+                <a:moveTo>
+                  <a:pt x="0" y="0"/>
+                </a:moveTo>
+                <a:lnTo>
+                  <a:pt x="10287000" y="0"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="10287000" y="12858750"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="12858750"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="0"/>
+                </a:lnTo>
+                <a:close/>
+              </a:path>
+            </a:pathLst>
+          </a:custGeom>
+          <a:blipFill>
+            <a:blip r:embed="rId2"/>
+            <a:stretch>
+              <a:fillRect l="-64678" t="0" r="-64678" b="0"/>
+            </a:stretch>
+          </a:blipFill>
+        </p:spPr>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr name="Freeform 3" id="3"/>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm flipH="false" flipV="false" rot="0">
+            <a:off x="4548960" y="2312065"/>
+            <a:ext cx="1189081" cy="1189081"/>
+          </a:xfrm>
+          <a:custGeom>
+            <a:avLst/>
+            <a:gdLst/>
+            <a:ahLst/>
+            <a:cxnLst/>
+            <a:rect r="r" b="b" t="t" l="l"/>
+            <a:pathLst>
+              <a:path h="1189081" w="1189081">
+                <a:moveTo>
+                  <a:pt x="0" y="0"/>
+                </a:moveTo>
+                <a:lnTo>
+                  <a:pt x="1189080" y="0"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="1189080" y="1189081"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="1189081"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="0"/>
+                </a:lnTo>
+                <a:close/>
+              </a:path>
+            </a:pathLst>
+          </a:custGeom>
+          <a:blipFill>
+            <a:blip r:embed="rId3">
+              <a:extLst>
+                <a:ext uri="{96DAC541-7B7A-43D3-8B79-37D633B846F1}">
+                  <asvg:svgBlip xmlns:asvg="http://schemas.microsoft.com/office/drawing/2016/SVG/main" r:embed="rId4"/>
+                </a:ext>
+              </a:extLst>
+            </a:blip>
+            <a:stretch>
+              <a:fillRect l="0" t="0" r="0" b="0"/>
+            </a:stretch>
+          </a:blipFill>
+        </p:spPr>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr name="Freeform 4" id="4"/>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm flipH="false" flipV="false" rot="0">
+            <a:off x="3430587" y="8336037"/>
+            <a:ext cx="3425826" cy="2210648"/>
+          </a:xfrm>
+          <a:custGeom>
+            <a:avLst/>
+            <a:gdLst/>
+            <a:ahLst/>
+            <a:cxnLst/>
+            <a:rect r="r" b="b" t="t" l="l"/>
+            <a:pathLst>
+              <a:path h="2210648" w="3425826">
+                <a:moveTo>
+                  <a:pt x="0" y="0"/>
+                </a:moveTo>
+                <a:lnTo>
+                  <a:pt x="3425826" y="0"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="3425826" y="2210648"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="2210648"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="0"/>
+                </a:lnTo>
+                <a:close/>
+              </a:path>
+            </a:pathLst>
+          </a:custGeom>
+          <a:blipFill>
+            <a:blip r:embed="rId5"/>
+            <a:stretch>
+              <a:fillRect l="-25321" t="-18791" r="-23182" b="-6632"/>
+            </a:stretch>
+          </a:blipFill>
+        </p:spPr>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr name="TextBox 5" id="5"/>
+          <p:cNvSpPr txBox="true"/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm rot="0">
+            <a:off x="1028700" y="3729746"/>
+            <a:ext cx="8229600" cy="1455421"/>
+          </a:xfrm>
+          <a:prstGeom prst="rect">
+            <a:avLst/>
+          </a:prstGeom>
+        </p:spPr>
+        <p:txBody>
+          <a:bodyPr anchor="t" rtlCol="false" tIns="0" lIns="0" bIns="0" rIns="0">
+            <a:spAutoFit/>
+          </a:bodyPr>
+          <a:lstStyle/>
+          <a:p>
+            <a:pPr algn="ctr">
+              <a:lnSpc>
+                <a:spcPts val="5879"/>
+              </a:lnSpc>
+              <a:spcBef>
+                <a:spcPct val="0"/>
+              </a:spcBef>
+            </a:pPr>
+            <a:r>
+              <a:rPr lang="en-US" b="true" sz="4199">
+                <a:solidFill>
+                  <a:srgbClr val="009B58"/>
+                </a:solidFill>
+                <a:latin typeface="Mulish Bold"/>
+                <a:ea typeface="Mulish Bold"/>
+                <a:cs typeface="Mulish Bold"/>
+                <a:sym typeface="Mulish Bold"/>
+              </a:rPr>
+              <a:t>Mantén tu perfil siempre actualizado</a:t>
+            </a:r>
+          </a:p>
+        </p:txBody>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr name="TextBox 6" id="6"/>
+          <p:cNvSpPr txBox="true"/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm rot="0">
+            <a:off x="1028700" y="5318517"/>
+            <a:ext cx="8229600" cy="2712720"/>
+          </a:xfrm>
+          <a:prstGeom prst="rect">
+            <a:avLst/>
+          </a:prstGeom>
+        </p:spPr>
+        <p:txBody>
+          <a:bodyPr anchor="t" rtlCol="false" tIns="0" lIns="0" bIns="0" rIns="0">
+            <a:spAutoFit/>
+          </a:bodyPr>
+          <a:lstStyle/>
+          <a:p>
+            <a:pPr algn="ctr">
+              <a:lnSpc>
+                <a:spcPts val="5490"/>
+              </a:lnSpc>
+            </a:pPr>
+            <a:r>
+              <a:rPr lang="en-US" sz="3000" b="true">
+                <a:solidFill>
+                  <a:srgbClr val="545454"/>
+                </a:solidFill>
+                <a:latin typeface="Mulish Bold"/>
+                <a:ea typeface="Mulish Bold"/>
+                <a:cs typeface="Mulish Bold"/>
+                <a:sym typeface="Mulish Bold"/>
+              </a:rPr>
+              <a:t>No solo cuando estés buscando.</a:t>
+            </a:r>
+          </a:p>
+          <a:p>
+            <a:pPr algn="ctr">
+              <a:lnSpc>
+                <a:spcPts val="5490"/>
+              </a:lnSpc>
+            </a:pPr>
+            <a:r>
+              <a:rPr lang="en-US" b="true" sz="3000">
+                <a:solidFill>
+                  <a:srgbClr val="545454"/>
+                </a:solidFill>
+                <a:latin typeface="Mulish Bold"/>
+                <a:ea typeface="Mulish Bold"/>
+                <a:cs typeface="Mulish Bold"/>
+                <a:sym typeface="Mulish Bold"/>
+              </a:rPr>
+              <a:t>Las oportunidades llegan cuando menos lo esperas. Y llegan al perfil que está listo, no al que está desactualizado</a:t>
+            </a:r>
+          </a:p>
+        </p:txBody>
+      </p:sp>
+    </p:spTree>
+  </p:cSld>
+  <p:clrMapOvr>
+    <a:masterClrMapping/>
+  </p:clrMapOvr>
+</p:sld>

@@ -1,0 +1,1127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<p:sld xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+  <p:cSld>
+    <p:spTree>
+      <p:nvGrpSpPr>
+        <p:cNvPr id="1" name=""/>
+        <p:cNvGrpSpPr/>
+        <p:nvPr/>
+      </p:nvGrpSpPr>
+      <p:grpSpPr>
+        <a:xfrm>
+          <a:off x="0" y="0"/>
+          <a:ext cx="0" cy="0"/>
+          <a:chOff x="0" y="0"/>
+          <a:chExt cx="0" cy="0"/>
+        </a:xfrm>
+      </p:grpSpPr>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr name="Freeform 2" id="2"/>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm flipH="false" flipV="false" rot="0">
+            <a:off x="2132932" y="3337783"/>
+            <a:ext cx="5829685" cy="6422714"/>
+          </a:xfrm>
+          <a:custGeom>
+            <a:avLst/>
+            <a:gdLst/>
+            <a:ahLst/>
+            <a:cxnLst/>
+            <a:rect r="r" b="b" t="t" l="l"/>
+            <a:pathLst>
+              <a:path h="6422714" w="5829685">
+                <a:moveTo>
+                  <a:pt x="0" y="0"/>
+                </a:moveTo>
+                <a:lnTo>
+                  <a:pt x="5829685" y="0"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="5829685" y="6422714"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="6422714"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="0"/>
+                </a:lnTo>
+                <a:close/>
+              </a:path>
+            </a:pathLst>
+          </a:custGeom>
+          <a:blipFill>
+            <a:blip r:embed="rId2">
+              <a:alphaModFix amt="10999"/>
+            </a:blip>
+            <a:stretch>
+              <a:fillRect l="-47086" t="-38489" r="-47147" b="-37809"/>
+            </a:stretch>
+          </a:blipFill>
+        </p:spPr>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr name="Freeform 3" id="3"/>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm flipH="true" flipV="false" rot="0">
+            <a:off x="-5660936" y="518653"/>
+            <a:ext cx="8229600" cy="5338953"/>
+          </a:xfrm>
+          <a:custGeom>
+            <a:avLst/>
+            <a:gdLst/>
+            <a:ahLst/>
+            <a:cxnLst/>
+            <a:rect r="r" b="b" t="t" l="l"/>
+            <a:pathLst>
+              <a:path h="5338953" w="8229600">
+                <a:moveTo>
+                  <a:pt x="8229600" y="0"/>
+                </a:moveTo>
+                <a:lnTo>
+                  <a:pt x="0" y="0"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="5338953"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="8229600" y="5338953"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="8229600" y="0"/>
+                </a:lnTo>
+                <a:close/>
+              </a:path>
+            </a:pathLst>
+          </a:custGeom>
+          <a:blipFill>
+            <a:blip r:embed="rId3"/>
+            <a:stretch>
+              <a:fillRect l="0" t="0" r="0" b="0"/>
+            </a:stretch>
+          </a:blipFill>
+        </p:spPr>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr name="Freeform 4" id="4"/>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm flipH="false" flipV="false" rot="0">
+            <a:off x="2201529" y="3188130"/>
+            <a:ext cx="5883943" cy="6482491"/>
+          </a:xfrm>
+          <a:custGeom>
+            <a:avLst/>
+            <a:gdLst/>
+            <a:ahLst/>
+            <a:cxnLst/>
+            <a:rect r="r" b="b" t="t" l="l"/>
+            <a:pathLst>
+              <a:path h="6482491" w="5883943">
+                <a:moveTo>
+                  <a:pt x="0" y="0"/>
+                </a:moveTo>
+                <a:lnTo>
+                  <a:pt x="5883942" y="0"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="5883942" y="6482490"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="6482490"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="0"/>
+                </a:lnTo>
+                <a:close/>
+              </a:path>
+            </a:pathLst>
+          </a:custGeom>
+          <a:blipFill>
+            <a:blip r:embed="rId4"/>
+            <a:stretch>
+              <a:fillRect l="-47086" t="-38489" r="-47147" b="-37809"/>
+            </a:stretch>
+          </a:blipFill>
+        </p:spPr>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr name="Freeform 5" id="5"/>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm flipH="false" flipV="false" rot="0">
+            <a:off x="5047775" y="6208436"/>
+            <a:ext cx="579732" cy="681407"/>
+          </a:xfrm>
+          <a:custGeom>
+            <a:avLst/>
+            <a:gdLst/>
+            <a:ahLst/>
+            <a:cxnLst/>
+            <a:rect r="r" b="b" t="t" l="l"/>
+            <a:pathLst>
+              <a:path h="681407" w="579732">
+                <a:moveTo>
+                  <a:pt x="0" y="0"/>
+                </a:moveTo>
+                <a:lnTo>
+                  <a:pt x="579732" y="0"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="579732" y="681408"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="681408"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="0"/>
+                </a:lnTo>
+                <a:close/>
+              </a:path>
+            </a:pathLst>
+          </a:custGeom>
+          <a:blipFill>
+            <a:blip r:embed="rId5"/>
+            <a:stretch>
+              <a:fillRect l="-63576" t="-44763" r="-60287" b="-45696"/>
+            </a:stretch>
+          </a:blipFill>
+        </p:spPr>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr name="Freeform 6" id="6"/>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm flipH="false" flipV="false" rot="0">
+            <a:off x="5850545" y="5096930"/>
+            <a:ext cx="615600" cy="755049"/>
+          </a:xfrm>
+          <a:custGeom>
+            <a:avLst/>
+            <a:gdLst/>
+            <a:ahLst/>
+            <a:cxnLst/>
+            <a:rect r="r" b="b" t="t" l="l"/>
+            <a:pathLst>
+              <a:path h="755049" w="615600">
+                <a:moveTo>
+                  <a:pt x="0" y="0"/>
+                </a:moveTo>
+                <a:lnTo>
+                  <a:pt x="615600" y="0"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="615600" y="755049"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="755049"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="0"/>
+                </a:lnTo>
+                <a:close/>
+              </a:path>
+            </a:pathLst>
+          </a:custGeom>
+          <a:blipFill>
+            <a:blip r:embed="rId6"/>
+            <a:stretch>
+              <a:fillRect l="-79856" t="-57899" r="-80478" b="-54354"/>
+            </a:stretch>
+          </a:blipFill>
+        </p:spPr>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr name="Freeform 7" id="7"/>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm flipH="false" flipV="false" rot="0">
+            <a:off x="5850545" y="6208436"/>
+            <a:ext cx="615600" cy="944377"/>
+          </a:xfrm>
+          <a:custGeom>
+            <a:avLst/>
+            <a:gdLst/>
+            <a:ahLst/>
+            <a:cxnLst/>
+            <a:rect r="r" b="b" t="t" l="l"/>
+            <a:pathLst>
+              <a:path h="944377" w="615600">
+                <a:moveTo>
+                  <a:pt x="0" y="0"/>
+                </a:moveTo>
+                <a:lnTo>
+                  <a:pt x="615600" y="0"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="615600" y="944378"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="944378"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="0"/>
+                </a:lnTo>
+                <a:close/>
+              </a:path>
+            </a:pathLst>
+          </a:custGeom>
+          <a:blipFill>
+            <a:blip r:embed="rId7"/>
+            <a:stretch>
+              <a:fillRect l="-56503" t="-22197" r="-65008" b="-22197"/>
+            </a:stretch>
+          </a:blipFill>
+        </p:spPr>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr name="Freeform 8" id="8"/>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm flipH="false" flipV="false" rot="0">
+            <a:off x="4886464" y="5096930"/>
+            <a:ext cx="562696" cy="920937"/>
+          </a:xfrm>
+          <a:custGeom>
+            <a:avLst/>
+            <a:gdLst/>
+            <a:ahLst/>
+            <a:cxnLst/>
+            <a:rect r="r" b="b" t="t" l="l"/>
+            <a:pathLst>
+              <a:path h="920937" w="562696">
+                <a:moveTo>
+                  <a:pt x="0" y="0"/>
+                </a:moveTo>
+                <a:lnTo>
+                  <a:pt x="562696" y="0"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="562696" y="920938"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="920938"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="0"/>
+                </a:lnTo>
+                <a:close/>
+              </a:path>
+            </a:pathLst>
+          </a:custGeom>
+          <a:blipFill>
+            <a:blip r:embed="rId8"/>
+            <a:stretch>
+              <a:fillRect l="-66040" t="-24343" r="-71332" b="-20692"/>
+            </a:stretch>
+          </a:blipFill>
+        </p:spPr>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr name="Freeform 9" id="9"/>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm flipH="false" flipV="false" rot="0">
+            <a:off x="6859386" y="6429375"/>
+            <a:ext cx="562696" cy="920937"/>
+          </a:xfrm>
+          <a:custGeom>
+            <a:avLst/>
+            <a:gdLst/>
+            <a:ahLst/>
+            <a:cxnLst/>
+            <a:rect r="r" b="b" t="t" l="l"/>
+            <a:pathLst>
+              <a:path h="920937" w="562696">
+                <a:moveTo>
+                  <a:pt x="0" y="0"/>
+                </a:moveTo>
+                <a:lnTo>
+                  <a:pt x="562696" y="0"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="562696" y="920937"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="920937"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="0"/>
+                </a:lnTo>
+                <a:close/>
+              </a:path>
+            </a:pathLst>
+          </a:custGeom>
+          <a:blipFill>
+            <a:blip r:embed="rId8"/>
+            <a:stretch>
+              <a:fillRect l="-66040" t="-24343" r="-71332" b="-20692"/>
+            </a:stretch>
+          </a:blipFill>
+        </p:spPr>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr name="Freeform 10" id="10"/>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm flipH="false" flipV="false" rot="0">
+            <a:off x="5143500" y="6889844"/>
+            <a:ext cx="615600" cy="944377"/>
+          </a:xfrm>
+          <a:custGeom>
+            <a:avLst/>
+            <a:gdLst/>
+            <a:ahLst/>
+            <a:cxnLst/>
+            <a:rect r="r" b="b" t="t" l="l"/>
+            <a:pathLst>
+              <a:path h="944377" w="615600">
+                <a:moveTo>
+                  <a:pt x="0" y="0"/>
+                </a:moveTo>
+                <a:lnTo>
+                  <a:pt x="615600" y="0"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="615600" y="944377"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="944377"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="0"/>
+                </a:lnTo>
+                <a:close/>
+              </a:path>
+            </a:pathLst>
+          </a:custGeom>
+          <a:blipFill>
+            <a:blip r:embed="rId7"/>
+            <a:stretch>
+              <a:fillRect l="-56503" t="-22197" r="-65008" b="-22197"/>
+            </a:stretch>
+          </a:blipFill>
+        </p:spPr>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr name="Freeform 11" id="11"/>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm flipH="false" flipV="false" rot="0">
+            <a:off x="6158345" y="7350312"/>
+            <a:ext cx="615600" cy="755049"/>
+          </a:xfrm>
+          <a:custGeom>
+            <a:avLst/>
+            <a:gdLst/>
+            <a:ahLst/>
+            <a:cxnLst/>
+            <a:rect r="r" b="b" t="t" l="l"/>
+            <a:pathLst>
+              <a:path h="755049" w="615600">
+                <a:moveTo>
+                  <a:pt x="0" y="0"/>
+                </a:moveTo>
+                <a:lnTo>
+                  <a:pt x="615600" y="0"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="615600" y="755049"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="755049"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="0"/>
+                </a:lnTo>
+                <a:close/>
+              </a:path>
+            </a:pathLst>
+          </a:custGeom>
+          <a:blipFill>
+            <a:blip r:embed="rId6"/>
+            <a:stretch>
+              <a:fillRect l="-79856" t="-57899" r="-80478" b="-54354"/>
+            </a:stretch>
+          </a:blipFill>
+        </p:spPr>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr name="Freeform 12" id="12"/>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm flipH="false" flipV="false" rot="0">
+            <a:off x="6842350" y="5557399"/>
+            <a:ext cx="579732" cy="681407"/>
+          </a:xfrm>
+          <a:custGeom>
+            <a:avLst/>
+            <a:gdLst/>
+            <a:ahLst/>
+            <a:cxnLst/>
+            <a:rect r="r" b="b" t="t" l="l"/>
+            <a:pathLst>
+              <a:path h="681407" w="579732">
+                <a:moveTo>
+                  <a:pt x="0" y="0"/>
+                </a:moveTo>
+                <a:lnTo>
+                  <a:pt x="579732" y="0"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="579732" y="681407"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="681407"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="0"/>
+                </a:lnTo>
+                <a:close/>
+              </a:path>
+            </a:pathLst>
+          </a:custGeom>
+          <a:blipFill>
+            <a:blip r:embed="rId5"/>
+            <a:stretch>
+              <a:fillRect l="-63576" t="-44763" r="-60287" b="-45696"/>
+            </a:stretch>
+          </a:blipFill>
+        </p:spPr>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr name="Freeform 13" id="13"/>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm flipH="false" flipV="false" rot="0">
+            <a:off x="6859386" y="7834221"/>
+            <a:ext cx="579732" cy="681407"/>
+          </a:xfrm>
+          <a:custGeom>
+            <a:avLst/>
+            <a:gdLst/>
+            <a:ahLst/>
+            <a:cxnLst/>
+            <a:rect r="r" b="b" t="t" l="l"/>
+            <a:pathLst>
+              <a:path h="681407" w="579732">
+                <a:moveTo>
+                  <a:pt x="0" y="0"/>
+                </a:moveTo>
+                <a:lnTo>
+                  <a:pt x="579733" y="0"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="579733" y="681407"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="681407"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="0"/>
+                </a:lnTo>
+                <a:close/>
+              </a:path>
+            </a:pathLst>
+          </a:custGeom>
+          <a:blipFill>
+            <a:blip r:embed="rId5"/>
+            <a:stretch>
+              <a:fillRect l="-63576" t="-44763" r="-60287" b="-45696"/>
+            </a:stretch>
+          </a:blipFill>
+        </p:spPr>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr name="Freeform 14" id="14"/>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm flipH="false" flipV="false" rot="0">
+            <a:off x="5759100" y="8305386"/>
+            <a:ext cx="562696" cy="920937"/>
+          </a:xfrm>
+          <a:custGeom>
+            <a:avLst/>
+            <a:gdLst/>
+            <a:ahLst/>
+            <a:cxnLst/>
+            <a:rect r="r" b="b" t="t" l="l"/>
+            <a:pathLst>
+              <a:path h="920937" w="562696">
+                <a:moveTo>
+                  <a:pt x="0" y="0"/>
+                </a:moveTo>
+                <a:lnTo>
+                  <a:pt x="562696" y="0"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="562696" y="920937"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="920937"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="0"/>
+                </a:lnTo>
+                <a:close/>
+              </a:path>
+            </a:pathLst>
+          </a:custGeom>
+          <a:blipFill>
+            <a:blip r:embed="rId8"/>
+            <a:stretch>
+              <a:fillRect l="-66040" t="-24343" r="-71332" b="-20692"/>
+            </a:stretch>
+          </a:blipFill>
+        </p:spPr>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr name="Freeform 15" id="15"/>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm flipH="false" flipV="false" rot="0">
+            <a:off x="4953597" y="4151382"/>
+            <a:ext cx="615600" cy="755049"/>
+          </a:xfrm>
+          <a:custGeom>
+            <a:avLst/>
+            <a:gdLst/>
+            <a:ahLst/>
+            <a:cxnLst/>
+            <a:rect r="r" b="b" t="t" l="l"/>
+            <a:pathLst>
+              <a:path h="755049" w="615600">
+                <a:moveTo>
+                  <a:pt x="0" y="0"/>
+                </a:moveTo>
+                <a:lnTo>
+                  <a:pt x="615600" y="0"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="615600" y="755048"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="755048"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="0"/>
+                </a:lnTo>
+                <a:close/>
+              </a:path>
+            </a:pathLst>
+          </a:custGeom>
+          <a:blipFill>
+            <a:blip r:embed="rId6"/>
+            <a:stretch>
+              <a:fillRect l="-79856" t="-57899" r="-80478" b="-54354"/>
+            </a:stretch>
+          </a:blipFill>
+        </p:spPr>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr name="Freeform 16" id="16"/>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm flipH="false" flipV="false" rot="0">
+            <a:off x="5424848" y="4624742"/>
+            <a:ext cx="615600" cy="944377"/>
+          </a:xfrm>
+          <a:custGeom>
+            <a:avLst/>
+            <a:gdLst/>
+            <a:ahLst/>
+            <a:cxnLst/>
+            <a:rect r="r" b="b" t="t" l="l"/>
+            <a:pathLst>
+              <a:path h="944377" w="615600">
+                <a:moveTo>
+                  <a:pt x="0" y="0"/>
+                </a:moveTo>
+                <a:lnTo>
+                  <a:pt x="615600" y="0"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="615600" y="944377"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="944377"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="0"/>
+                </a:lnTo>
+                <a:close/>
+              </a:path>
+            </a:pathLst>
+          </a:custGeom>
+          <a:blipFill>
+            <a:blip r:embed="rId7"/>
+            <a:stretch>
+              <a:fillRect l="-56503" t="-22197" r="-65008" b="-22197"/>
+            </a:stretch>
+          </a:blipFill>
+        </p:spPr>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr name="Freeform 17" id="17"/>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm flipH="false" flipV="false" rot="0">
+            <a:off x="5569197" y="5968906"/>
+            <a:ext cx="562696" cy="920937"/>
+          </a:xfrm>
+          <a:custGeom>
+            <a:avLst/>
+            <a:gdLst/>
+            <a:ahLst/>
+            <a:cxnLst/>
+            <a:rect r="r" b="b" t="t" l="l"/>
+            <a:pathLst>
+              <a:path h="920937" w="562696">
+                <a:moveTo>
+                  <a:pt x="0" y="0"/>
+                </a:moveTo>
+                <a:lnTo>
+                  <a:pt x="562696" y="0"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="562696" y="920938"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="920938"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="0"/>
+                </a:lnTo>
+                <a:close/>
+              </a:path>
+            </a:pathLst>
+          </a:custGeom>
+          <a:blipFill>
+            <a:blip r:embed="rId8"/>
+            <a:stretch>
+              <a:fillRect l="-66040" t="-24343" r="-71332" b="-20692"/>
+            </a:stretch>
+          </a:blipFill>
+        </p:spPr>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr name="Freeform 18" id="18"/>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm flipH="false" flipV="false" rot="0">
+            <a:off x="6321796" y="5747968"/>
+            <a:ext cx="579732" cy="681407"/>
+          </a:xfrm>
+          <a:custGeom>
+            <a:avLst/>
+            <a:gdLst/>
+            <a:ahLst/>
+            <a:cxnLst/>
+            <a:rect r="r" b="b" t="t" l="l"/>
+            <a:pathLst>
+              <a:path h="681407" w="579732">
+                <a:moveTo>
+                  <a:pt x="0" y="0"/>
+                </a:moveTo>
+                <a:lnTo>
+                  <a:pt x="579732" y="0"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="579732" y="681407"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="681407"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="0"/>
+                </a:lnTo>
+                <a:close/>
+              </a:path>
+            </a:pathLst>
+          </a:custGeom>
+          <a:blipFill>
+            <a:blip r:embed="rId5"/>
+            <a:stretch>
+              <a:fillRect l="-63576" t="-44763" r="-60287" b="-45696"/>
+            </a:stretch>
+          </a:blipFill>
+        </p:spPr>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr name="Freeform 19" id="19"/>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm flipH="false" flipV="false" rot="0">
+            <a:off x="6321796" y="6595264"/>
+            <a:ext cx="615600" cy="755049"/>
+          </a:xfrm>
+          <a:custGeom>
+            <a:avLst/>
+            <a:gdLst/>
+            <a:ahLst/>
+            <a:cxnLst/>
+            <a:rect r="r" b="b" t="t" l="l"/>
+            <a:pathLst>
+              <a:path h="755049" w="615600">
+                <a:moveTo>
+                  <a:pt x="0" y="0"/>
+                </a:moveTo>
+                <a:lnTo>
+                  <a:pt x="615600" y="0"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="615600" y="755048"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="755048"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="0"/>
+                </a:lnTo>
+                <a:close/>
+              </a:path>
+            </a:pathLst>
+          </a:custGeom>
+          <a:blipFill>
+            <a:blip r:embed="rId6"/>
+            <a:stretch>
+              <a:fillRect l="-79856" t="-57899" r="-80478" b="-54354"/>
+            </a:stretch>
+          </a:blipFill>
+        </p:spPr>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr name="Freeform 20" id="20"/>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm flipH="false" flipV="false" rot="0">
+            <a:off x="5627507" y="7046429"/>
+            <a:ext cx="579732" cy="681407"/>
+          </a:xfrm>
+          <a:custGeom>
+            <a:avLst/>
+            <a:gdLst/>
+            <a:ahLst/>
+            <a:cxnLst/>
+            <a:rect r="r" b="b" t="t" l="l"/>
+            <a:pathLst>
+              <a:path h="681407" w="579732">
+                <a:moveTo>
+                  <a:pt x="0" y="0"/>
+                </a:moveTo>
+                <a:lnTo>
+                  <a:pt x="579732" y="0"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="579732" y="681407"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="681407"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="0"/>
+                </a:lnTo>
+                <a:close/>
+              </a:path>
+            </a:pathLst>
+          </a:custGeom>
+          <a:blipFill>
+            <a:blip r:embed="rId5"/>
+            <a:stretch>
+              <a:fillRect l="-63576" t="-44763" r="-60287" b="-45696"/>
+            </a:stretch>
+          </a:blipFill>
+        </p:spPr>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr name="Freeform 21" id="21"/>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm flipH="false" flipV="false" rot="0">
+            <a:off x="6207239" y="8043439"/>
+            <a:ext cx="615600" cy="944377"/>
+          </a:xfrm>
+          <a:custGeom>
+            <a:avLst/>
+            <a:gdLst/>
+            <a:ahLst/>
+            <a:cxnLst/>
+            <a:rect r="r" b="b" t="t" l="l"/>
+            <a:pathLst>
+              <a:path h="944377" w="615600">
+                <a:moveTo>
+                  <a:pt x="0" y="0"/>
+                </a:moveTo>
+                <a:lnTo>
+                  <a:pt x="615600" y="0"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="615600" y="944377"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="944377"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="0"/>
+                </a:lnTo>
+                <a:close/>
+              </a:path>
+            </a:pathLst>
+          </a:custGeom>
+          <a:blipFill>
+            <a:blip r:embed="rId7"/>
+            <a:stretch>
+              <a:fillRect l="-56503" t="-22197" r="-65008" b="-22197"/>
+            </a:stretch>
+          </a:blipFill>
+        </p:spPr>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr name="Freeform 22" id="22"/>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm flipH="false" flipV="false" rot="0">
+            <a:off x="6937396" y="7423954"/>
+            <a:ext cx="579732" cy="681407"/>
+          </a:xfrm>
+          <a:custGeom>
+            <a:avLst/>
+            <a:gdLst/>
+            <a:ahLst/>
+            <a:cxnLst/>
+            <a:rect r="r" b="b" t="t" l="l"/>
+            <a:pathLst>
+              <a:path h="681407" w="579732">
+                <a:moveTo>
+                  <a:pt x="0" y="0"/>
+                </a:moveTo>
+                <a:lnTo>
+                  <a:pt x="579732" y="0"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="579732" y="681407"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="681407"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="0"/>
+                </a:lnTo>
+                <a:close/>
+              </a:path>
+            </a:pathLst>
+          </a:custGeom>
+          <a:blipFill>
+            <a:blip r:embed="rId5"/>
+            <a:stretch>
+              <a:fillRect l="-63576" t="-44763" r="-60287" b="-45696"/>
+            </a:stretch>
+          </a:blipFill>
+        </p:spPr>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr name="Freeform 23" id="23"/>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm flipH="false" flipV="false" rot="0">
+            <a:off x="3345819" y="1028700"/>
+            <a:ext cx="3595362" cy="994717"/>
+          </a:xfrm>
+          <a:custGeom>
+            <a:avLst/>
+            <a:gdLst/>
+            <a:ahLst/>
+            <a:cxnLst/>
+            <a:rect r="r" b="b" t="t" l="l"/>
+            <a:pathLst>
+              <a:path h="994717" w="3595362">
+                <a:moveTo>
+                  <a:pt x="0" y="0"/>
+                </a:moveTo>
+                <a:lnTo>
+                  <a:pt x="3595362" y="0"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="3595362" y="994717"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="994717"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="0"/>
+                </a:lnTo>
+                <a:close/>
+              </a:path>
+            </a:pathLst>
+          </a:custGeom>
+          <a:blipFill>
+            <a:blip r:embed="rId9"/>
+            <a:stretch>
+              <a:fillRect l="0" t="0" r="0" b="0"/>
+            </a:stretch>
+          </a:blipFill>
+        </p:spPr>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr name="Freeform 24" id="24"/>
+          <p:cNvSpPr/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm flipH="false" flipV="false" rot="0">
+            <a:off x="8085471" y="9160574"/>
+            <a:ext cx="8229600" cy="5338953"/>
+          </a:xfrm>
+          <a:custGeom>
+            <a:avLst/>
+            <a:gdLst/>
+            <a:ahLst/>
+            <a:cxnLst/>
+            <a:rect r="r" b="b" t="t" l="l"/>
+            <a:pathLst>
+              <a:path h="5338953" w="8229600">
+                <a:moveTo>
+                  <a:pt x="0" y="0"/>
+                </a:moveTo>
+                <a:lnTo>
+                  <a:pt x="8229600" y="0"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="8229600" y="5338953"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="5338953"/>
+                </a:lnTo>
+                <a:lnTo>
+                  <a:pt x="0" y="0"/>
+                </a:lnTo>
+                <a:close/>
+              </a:path>
+            </a:pathLst>
+          </a:custGeom>
+          <a:blipFill>
+            <a:blip r:embed="rId3"/>
+            <a:stretch>
+              <a:fillRect l="0" t="0" r="0" b="0"/>
+            </a:stretch>
+          </a:blipFill>
+        </p:spPr>
+      </p:sp>
+      <p:sp>
+        <p:nvSpPr>
+          <p:cNvPr name="TextBox 25" id="25"/>
+          <p:cNvSpPr txBox="true"/>
+          <p:nvPr/>
+        </p:nvSpPr>
+        <p:spPr>
+          <a:xfrm rot="0">
+            <a:off x="1028700" y="10730230"/>
+            <a:ext cx="8229600" cy="1099820"/>
+          </a:xfrm>
+          <a:prstGeom prst="rect">
+            <a:avLst/>
+          </a:prstGeom>
+        </p:spPr>
+        <p:txBody>
+          <a:bodyPr anchor="t" rtlCol="false" tIns="0" lIns="0" bIns="0" rIns="0">
+            <a:spAutoFit/>
+          </a:bodyPr>
+          <a:lstStyle/>
+          <a:p>
+            <a:pPr algn="ctr">
+              <a:lnSpc>
+                <a:spcPts val="4479"/>
+              </a:lnSpc>
+              <a:spcBef>
+                <a:spcPct val="0"/>
+              </a:spcBef>
+            </a:pPr>
+            <a:r>
+              <a:rPr lang="en-US" b="true" sz="3199">
+                <a:solidFill>
+                  <a:srgbClr val="005959"/>
+                </a:solidFill>
+                <a:latin typeface="Mulish Heavy"/>
+                <a:ea typeface="Mulish Heavy"/>
+                <a:cs typeface="Mulish Heavy"/>
+                <a:sym typeface="Mulish Heavy"/>
+              </a:rPr>
+              <a:t>EL EMBUDO ROTO QUE TE CUESTA PRODUCTIVIDAD</a:t>
+            </a:r>
+          </a:p>
+        </p:txBody>
+      </p:sp>
+    </p:spTree>
+  </p:cSld>
+  <p:clrMapOvr>
+    <a:masterClrMapping/>
+  </p:clrMapOvr>
+</p:sld>

@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hutrit · Informe Meta Ads · Feb–Mar 2026</title>
+<style>
+  /* ─── CSS Variables ─────────────────────────────────────────── */
+  :root {
+    --bg-base:        #0D1117;
+    --bg-surface:     #161B22;
+    --bg-elevated:    #1C2330;
+    --bg-hover:       #222B3A;
+    --accent:         #00B4A6;
+    --accent-dim:     rgba(0, 180, 166, 0.12);
+    --accent-glow:    rgba(0, 180, 166, 0.25);
+    --text-primary:   #E6EDF3;
+    --text-secondary: #8B949E;
+    --text-muted:     #484F58;
+    --border:         rgba(255,255,255,0.07);
+    --border-accent:  rgba(0, 180, 166, 0.3);
+    --green:          #3FB950;
+    --green-dim:      rgba(63,185,80,0.12);
+    --yellow:         #D29922;
+    --yellow-dim:     rgba(210,153,34,0.12);
+    --red:            #F85149;
+    --red-dim:        rgba(248,81,73,0.12);
+    --gray:           #6E7681;
+    --gray-dim:       rgba(110,118,129,0.15);
+    --radius-sm:      6px;
+    --radius-md:      10px;
+    --radius-lg:      16px;
+    --shadow-card:    0 1px 3px rgba(0,0,0,0.4), 0 4px 16px rgba(0,0,0,0.3);
+    --shadow-accent:  0 0 20px rgba(0,180,166,0.15);
+    --font:           -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    --font-mono:      'SF Mono', 'Cascadia Code', 'Fira Code', monospace;
+  }
+
+  /* ─── Reset & Base ──────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font);
+    background: var(--bg-base);
+    color: var(--text-primary);
+    min-height: 100vh;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  a { color: var(--accent); text-decoration: none; }
+
+  /* ─── Layout ────────────────────────────────────────────────── */
+  .page-wrap {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px 64px;
+  }
+
+  /* ─── Header ────────────────────────────────────────────────── */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 32px 0 24px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .header-left { display: flex; flex-direction: column; gap: 4px; }
+  .header-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .header-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.3px;
+  }
+  .header-sub {
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  .header-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+  }
+  .spend-badge {
+    background: var(--accent-dim);
+    border: 1px solid var(--border-accent);
+    border-radius: var(--radius-md);
+    padding: 10px 20px;
+    text-align: center;
+  }
+  .spend-badge__label {
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .spend-badge__value {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    letter-spacing: -0.5px;
+  }
+
+  /* ─── Section ───────────────────────────────────────────────── */
+  .section { margin-bottom: 36px; }
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ─── KPI Cards ─────────────────────────────────────────────── */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 900px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 500px) { .kpi-grid { grid-template-columns: 1fr; } }
+
+  .kpi-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 22px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: var(--shadow-card);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    opacity: 0.6;
+  }
+  .kpi-card:hover {
+    border-color: var(--border-accent);
+    box-shadow: var(--shadow-card), var(--shadow-accent);
+  }
+  .kpi-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .kpi-value {
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    letter-spacing: -0.8px;
+    line-height: 1;
+  }
+  .kpi-value.accent { color: var(--accent); }
+  .kpi-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  /* ─── Table ─────────────────────────────────────────────────── */
+  .table-wrap {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+  }
+  .table-header {
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .table-header-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  .table-hint {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  thead th {
+    background: var(--bg-elevated);
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    text-align: left;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.15s;
+    position: sticky;
+    top: 0;
+  }
+  thead th:hover { color: var(--accent); }
+  thead th.sort-asc::after  { content: ' ↑'; color: var(--accent); }
+  thead th.sort-desc::after { content: ' ↓'; color: var(--accent); }
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.12s;
+  }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--bg-hover); }
+  tbody td {
+    padding: 10px 14px;
+    color: var(--text-primary);
+    white-space: nowrap;
+  }
+  .td-name { font-weight: 500; color: var(--text-primary); max-width: 200px; white-space: normal; line-height: 1.3; }
+  .td-num {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-align: right;
+  }
+  .td-num.large { font-size: 13px; font-weight: 600; }
+
+  /* Status pill */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .pill-active   { background: var(--green-dim); color: var(--green); border: 1px solid rgba(63,185,80,0.25); }
+  .pill-inactive { background: var(--gray-dim);  color: var(--gray);  border: 1px solid rgba(110,118,129,0.2); }
+  .pill::before {
+    content: '';
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  /* CPR color scale cells */
+  .cpr-excellent { color: #3FB950; font-weight: 700; }
+  .cpr-good      { color: #58A6FF; font-weight: 600; }
+  .cpr-fair      { color: #D29922; font-weight: 500; }
+  .cpr-poor      { color: #F85149; font-weight: 500; }
+
+  /* ─── Charts ─────────────────────────────────────────────────── */
+  .charts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 800px) { .charts-grid { grid-template-columns: 1fr; } }
+
+  .chart-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    box-shadow: var(--shadow-card);
+  }
+  .chart-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+
+  /* Horizontal bar chart */
+  .bar-list { display: flex; flex-direction: column; gap: 10px; }
+  .bar-item { display: flex; flex-direction: column; gap: 4px; }
+  .bar-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .bar-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
+  }
+  .bar-value {
+    font-size: 12px;
+    font-family: var(--font-mono);
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  .bar-track {
+    height: 8px;
+    background: var(--bg-elevated);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--accent), #00D4C4);
+    transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    width: 0;
+  }
+  .bar-fill.spend {
+    background: linear-gradient(90deg, #7C3AED, #A78BFA);
+  }
+
+  /* ─── Active vs Inactive ─────────────────────────────────────── */
+  .split-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 600px) { .split-grid { grid-template-columns: 1fr; } }
+
+  .split-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .split-card.active-card   { border-color: rgba(63,185,80,0.25); }
+  .split-card.inactive-card { border-color: rgba(110,118,129,0.2); }
+
+  .split-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .split-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+  }
+  .split-dot.active   { background: var(--green); box-shadow: 0 0 8px var(--green); }
+  .split-dot.inactive { background: var(--gray); }
+
+  .split-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .split-stat { display: flex; flex-direction: column; gap: 2px; }
+  .split-stat-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-muted);
+  }
+  .split-stat-value {
+    font-size: 20px;
+    font-weight: 800;
+    font-family: var(--font-mono);
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
+  }
+  .split-stat-value.green  { color: var(--green); }
+  .split-stat-value.accent { color: var(--accent); }
+
+  .split-share-bar {
+    height: 6px;
+    background: var(--bg-elevated);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-top: 4px;
+  }
+  .split-share-fill {
+    height: 100%;
+    border-radius: 999px;
+    transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    width: 0;
+  }
+  .split-share-fill.active   { background: var(--green); }
+  .split-share-fill.inactive { background: var(--gray); }
+
+  .split-share-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  /* ─── Footer ─────────────────────────────────────────────────── */
+  .footer {
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+    padding-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .footer-left {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .footer-logo {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    letter-spacing: -0.2px;
+  }
+  .footer-logo span { color: var(--accent); }
+
+  /* ─── Scrollbar ─────────────────────────────────────────────── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg-base); }
+  ::-webkit-scrollbar-thumb { background: var(--bg-hover); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+  /* ─── Animations ────────────────────────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .kpi-card  { animation: fadeUp 0.4s ease both; }
+  .kpi-card:nth-child(1) { animation-delay: 0.05s; }
+  .kpi-card:nth-child(2) { animation-delay: 0.10s; }
+  .kpi-card:nth-child(3) { animation-delay: 0.15s; }
+  .kpi-card:nth-child(4) { animation-delay: 0.20s; }
+
+  .table-wrap { animation: fadeUp 0.4s 0.25s ease both; }
+  .chart-card { animation: fadeUp 0.4s 0.3s ease both; }
+  .split-card { animation: fadeUp 0.4s 0.35s ease both; }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <!-- ── HEADER ─────────────────────────────────────────────────── -->
+  <header class="header">
+    <div class="header-left">
+      <span class="header-eyebrow">Meta Ads Performance</span>
+      <h1 class="header-title">Informe de Campañas Meta</h1>
+      <p class="header-sub">28 Feb – 29 Mar 2026 &nbsp;·&nbsp; 14 campañas &nbsp;·&nbsp; Hutrit B2B</p>
+    </div>
+    <div class="header-badge">
+      <div class="spend-badge">
+        <div class="spend-badge__label">Gasto Total</div>
+        <div class="spend-badge__value" id="total-spend-header">€277.99</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── KPI CARDS ───────────────────────────────────────────────── -->
+  <section class="section">
+    <h2 class="section-title">Indicadores Clave</h2>
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <span class="kpi-label">Gasto Total</span>
+        <span class="kpi-value accent" id="kpi-spend">€0</span>
+        <span class="kpi-sub">EUR · 29 dias</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Resultados Totales</span>
+        <span class="kpi-value" id="kpi-results">0</span>
+        <span class="kpi-sub">Visitas a landing page</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">CPR Combinado</span>
+        <span class="kpi-value accent" id="kpi-cpr">€0</span>
+        <span class="kpi-sub">Coste por resultado</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Alcance Total</span>
+        <span class="kpi-value" id="kpi-reach">0</span>
+        <span class="kpi-sub">Personas unicas alcanzadas</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CAMPAIGN TABLE ──────────────────────────────────────────── -->
+  <section class="section">
+    <h2 class="section-title">Tabla de Campañas</h2>
+    <div class="table-wrap">
+      <div class="table-header">
+        <span class="table-header-title">Todas las campañas — ordenadas por CPR (mejor primero)</span>
+        <span class="table-hint">Haz clic en una columna para ordenar</span>
+      </div>
+      <div style="overflow-x:auto;">
+        <table id="campaigns-table">
+          <thead>
+            <tr>
+              <th data-col="name"       data-type="str" >#&nbsp;&nbsp;Campaña</th>
+              <th data-col="status"     data-type="str" >Estado</th>
+              <th data-col="results"    data-type="num" >Resultados</th>
+              <th data-col="spend"      data-type="num" >Gasto (€)</th>
+              <th data-col="cpr"        data-type="num" >CPR (€)</th>
+              <th data-col="impr"       data-type="num" >Impresiones</th>
+              <th data-col="reach"      data-type="num" >Alcance</th>
+              <th data-col="ctrproxy"   data-type="num" >CTR-proxy</th>
+            </tr>
+          </thead>
+          <tbody id="table-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CHARTS ──────────────────────────────────────────────────── -->
+  <section class="section">
+    <h2 class="section-title">Visualizaciones</h2>
+    <div class="charts-grid">
+      <!-- Top 5 by results -->
+      <div class="chart-card">
+        <div class="chart-title">Top 5 por Resultados</div>
+        <div class="bar-list" id="chart-results"></div>
+      </div>
+      <!-- Spend distribution -->
+      <div class="chart-card">
+        <div class="chart-title">Distribucion de Gasto por Campaña</div>
+        <div class="bar-list" id="chart-spend"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ACTIVE vs INACTIVE ──────────────────────────────────────── -->
+  <section class="section">
+    <h2 class="section-title">Activas vs. Inactivas</h2>
+    <div class="split-grid">
+      <div class="split-card active-card">
+        <div class="split-heading">
+          <span class="split-dot active"></span>
+          Campañas Activas
+        </div>
+        <div class="split-stats">
+          <div class="split-stat">
+            <span class="split-stat-label">Campañas</span>
+            <span class="split-stat-value green">3</span>
+          </div>
+          <div class="split-stat">
+            <span class="split-stat-label">Gasto</span>
+            <span class="split-stat-value accent">€70.86</span>
+          </div>
+          <div class="split-stat">
+            <span class="split-stat-label">Resultados</span>
+            <span class="split-stat-value">7,204</span>
+          </div>
+          <div class="split-stat">
+            <span class="split-stat-label">CPR Prom.</span>
+            <span class="split-stat-value green">€0.0139</span>
+          </div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-muted);margin-bottom:4px;">
+            <span>% del gasto total</span><span>25.5%</span>
+          </div>
+          <div class="split-share-bar">
+            <div class="split-share-fill active" data-pct="25.5"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-muted);margin-top:8px;margin-bottom:4px;">
+            <span>% de resultados totales</span><span>41.6%</span>
+          </div>
+          <div class="split-share-bar">
+            <div class="split-share-fill active" data-pct="41.6"></div>
+          </div>
+        </div>
+        <p style="font-size:12px;color:var(--text-secondary);line-height:1.5;">
+          Con solo el 25.5% del gasto, las campañas activas generan el 41.6% de los resultados — un CPR 32% mejor que las inactivas.
+        </p>
+      </div>
+      <div class="split-card inactive-card">
+        <div class="split-heading">
+          <span class="split-dot inactive"></span>
+          Campañas Inactivas
+        </div>
+        <div class="split-stats">
+          <div class="split-stat">
+            <span class="split-stat-label">Campañas</span>
+            <span class="split-stat-value">11</span>
+          </div>
+          <div class="split-stat">
+            <span class="split-stat-label">Gasto</span>
+            <span class="split-stat-value">€207.13</span>
+          </div>
+          <div class="split-stat">
+            <span class="split-stat-label">Resultados</span>
+            <span class="split-stat-value">10,119</span>
+          </div>
+          <div class="split-stat">
+            <span class="split-stat-label">CPR Prom.</span>
+            <span class="split-stat-value" style="color:var(--yellow)">€0.0205</span>
+          </div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-muted);margin-bottom:4px;">
+            <span>% del gasto total</span><span>74.5%</span>
+          </div>
+          <div class="split-share-bar">
+            <div class="split-share-fill inactive" data-pct="74.5"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-muted);margin-top:8px;margin-bottom:4px;">
+            <span>% de resultados totales</span><span>58.4%</span>
+          </div>
+          <div class="split-share-bar">
+            <div class="split-share-fill inactive" data-pct="58.4"></div>
+          </div>
+        </div>
+        <p style="font-size:12px;color:var(--text-secondary);line-height:1.5;">
+          Director Comercial y Sales Development (original) son las mejores candidatas a reactivacion dentro de este grupo.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ──────────────────────────────────────────────────── -->
+  <footer class="footer">
+    <span class="footer-left">Datos: Meta Ads Manager &nbsp;·&nbsp; Atribucion: 7 dias clic / 1 dia vista &nbsp;·&nbsp; Moneda: EUR</span>
+    <span class="footer-logo"><span>Hutrit</span> Marketing · 2026</span>
+  </footer>
+
+</div><!-- /page-wrap -->
+
+<script>
+/* ── DATA ───────────────────────────────────────────────────── */
+const campaigns = [
+  { name:'Paid Media',                  status:'inactive', results:1652, spend:68.82,  cpr:0.0417, impr:65486,  reach:37074 },
+  { name:'Sales Development 2',         status:'active',   results:6392, spend:59.79,  cpr:0.0094, impr:117961, reach:58205 },
+  { name:'Sales Development',           status:'inactive', results:1647, spend:21.13,  cpr:0.0128, impr:42369,  reach:28010 },
+  { name:'Campaña Tech nueva',          status:'inactive', results:1355, spend:20.98,  cpr:0.0155, impr:33403,  reach:26890 },
+  { name:'Director Comercial',          status:'inactive', results:1916, spend:20.93,  cpr:0.0109, impr:36874,  reach:24056 },
+  { name:'Campaña Project Manager',     status:'inactive', results:879,  spend:16.63,  cpr:0.0189, impr:23238,  reach:16121 },
+  { name:'SEO Campaing',                status:'inactive', results:750,  spend:15.98,  cpr:0.0213, impr:19301,  reach:13926 },
+  { name:'Apolo energies',              status:'inactive', results:554,  spend:12.37,  cpr:0.0223, impr:23615,  reach:17329 },
+  { name:'Automation Expert',           status:'inactive', results:521,  spend:11.99,  cpr:0.0230, impr:12653,  reach:9118  },
+  { name:'Cyber',                       status:'inactive', results:404,  spend:9.78,   cpr:0.0242, impr:10207,  reach:6534  },
+  { name:'Campaña IA',                  status:'active',   results:664,  spend:8.06,   cpr:0.0121, impr:14561,  reach:10745 },
+  { name:'Talentoa Consultores',        status:'inactive', results:294,  spend:5.49,   cpr:0.0187, impr:6606,   reach:5165  },
+  { name:'Campaing South Africa TECH',  status:'inactive', results:143,  spend:3.03,   cpr:0.0212, impr:5158,   reach:4714  },
+  { name:'DEVOPS',                      status:'active',   results:148,  spend:3.01,   cpr:0.0203, impr:3315,   reach:3055  },
+];
+
+/* compute ctr-proxy */
+campaigns.forEach(c => {
+  c.ctrproxy = (c.results / c.impr * 100);
+});
+
+/* ── COUNT-UP ANIMATION ─────────────────────────────────────── */
+function countUp(el, from, to, duration, format) {
+  const start = performance.now();
+  function step(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 4);
+    const value = from + (to - from) * eased;
+    el.textContent = format(value);
+    if (progress < 1) requestAnimationFrame(step);
+    else el.textContent = format(to);
+  }
+  requestAnimationFrame(step);
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  /* KPI count-ups */
+  countUp(document.getElementById('kpi-spend'),   0, 277.99, 1400, v => '€' + v.toFixed(2));
+  countUp(document.getElementById('kpi-results'), 0, 17323,  1400, v => Math.round(v).toLocaleString('es-ES'));
+  countUp(document.getElementById('kpi-cpr'),     0, 0.0161, 1400, v => '€' + v.toFixed(4));
+  countUp(document.getElementById('kpi-reach'),   0, 260942, 1400, v => Math.round(v).toLocaleString('es-ES'));
+
+  /* ── TABLE ─────────────────────────────────────────────────── */
+  let sortCol = 'cpr';
+  let sortDir = 'asc';
+
+  function cprClass(v) {
+    if (v <= 0.012)  return 'cpr-excellent';
+    if (v <= 0.0165) return 'cpr-good';
+    if (v <= 0.022)  return 'cpr-fair';
+    return 'cpr-poor';
+  }
+
+  function renderTable() {
+    const data = [...campaigns].sort((a, b) => {
+      const av = a[sortCol], bv = b[sortCol];
+      if (typeof av === 'string') {
+        return sortDir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      }
+      return sortDir === 'asc' ? av - bv : bv - av;
+    });
+
+    const tbody = document.getElementById('table-body');
+    tbody.innerHTML = '';
+    data.forEach((c, i) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="td-name">${i+1}&nbsp;&nbsp;${c.name}</td>
+        <td><span class="pill pill-${c.status}">${c.status === 'active' ? 'Activa' : 'Inactiva'}</span></td>
+        <td class="td-num large">${c.results.toLocaleString('es-ES')}</td>
+        <td class="td-num">€${c.spend.toFixed(2)}</td>
+        <td class="td-num ${cprClass(c.cpr)}">€${c.cpr.toFixed(4)}</td>
+        <td class="td-num">${c.impr.toLocaleString('es-ES')}</td>
+        <td class="td-num">${c.reach.toLocaleString('es-ES')}</td>
+        <td class="td-num">${c.ctrproxy.toFixed(2)}%</td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    /* update header sort indicators */
+    document.querySelectorAll('#campaigns-table thead th').forEach(th => {
+      th.classList.remove('sort-asc','sort-desc');
+      if (th.dataset.col === sortCol) {
+        th.classList.add(sortDir === 'asc' ? 'sort-asc' : 'sort-desc');
+      }
+    });
+  }
+
+  document.querySelectorAll('#campaigns-table thead th').forEach(th => {
+    th.addEventListener('click', () => {
+      const col = th.dataset.col;
+      if (col === sortCol) {
+        sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+      } else {
+        sortCol = col;
+        sortDir = th.dataset.type === 'num' ? 'asc' : 'asc';
+      }
+      renderTable();
+    });
+  });
+
+  renderTable();
+
+  /* ── CHARTS ────────────────────────────────────────────────── */
+  function buildBarChart(containerId, items, valueKey, labelFn, maxVal, fillClass) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = '';
+    items.forEach(item => {
+      const pct = (item[valueKey] / maxVal * 100).toFixed(1);
+      const div = document.createElement('div');
+      div.className = 'bar-item';
+      div.innerHTML = `
+        <div class="bar-meta">
+          <span class="bar-label">${item.name}</span>
+          <span class="bar-value">${labelFn(item[valueKey])}</span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-fill${fillClass ? ' ' + fillClass : ''}" data-pct="${pct}" style="width:0%"></div>
+        </div>
+      `;
+      container.appendChild(div);
+    });
+  }
+
+  /* top 5 by results */
+  const top5results = [...campaigns].sort((a,b) => b.results - a.results).slice(0,5);
+  const maxResults = top5results[0].results;
+  buildBarChart('chart-results', top5results, 'results',
+    v => v.toLocaleString('es-ES'), maxResults, '');
+
+  /* top 7 by spend */
+  const top7spend = [...campaigns].sort((a,b) => b.spend - a.spend).slice(0,7);
+  const maxSpend = top7spend[0].spend;
+  buildBarChart('chart-spend', top7spend, 'spend',
+    v => '€' + v.toFixed(2), maxSpend, 'spend');
+
+  /* ── ANIMATE BARS ──────────────────────────────────────────── */
+  function animateBars() {
+    document.querySelectorAll('.bar-fill[data-pct], .split-share-fill[data-pct]').forEach(el => {
+      const pct = parseFloat(el.dataset.pct);
+      setTimeout(() => { el.style.width = pct + '%'; }, 200);
+    });
+  }
+  /* Use IntersectionObserver to trigger on scroll */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { animateBars(); observer.disconnect(); } });
+  }, { threshold: 0.1 });
+  const chartSection = document.querySelector('.charts-grid');
+  if (chartSection) observer.observe(chartSection);
+  else animateBars();
+});
+</script>
+</body>
+</html>
