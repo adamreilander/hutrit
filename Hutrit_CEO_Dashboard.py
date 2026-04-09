@@ -25,32 +25,37 @@ st.markdown("""
 # --- 2. MOTOR DE INTELIGENCIA (EL CEREBRO) ---
 MAPA_HUTRIT = """
 Capacidades Disponibles:
-- Marketing: Publicación en Buffer (vía Make), /market-ads, /market-seo, /market-social, /market-emails.
-- Ventas: Envío de correos reales con Resend, /sdr-quality-audit, /prospect-mining, /call-prep.
-- Creativos: /social-creative-designer (Nano Banana).
-- Scripts Python: prospector.py (Maps), researcher.py, linkedin_metrics.py.
-- Archivos: Lectura/Escritura de CSV y conversión de reportes MD a TXT.
+- Marketing: Publicación en Buffer (vía Make), /market-ads, /market-seo, /market-social.
+- Ventas: Envío de correos reales con Resend, /sdr-quality-audit.
+- Creativos: Inspiración en carpeta /social para Nano Banana.
+- Archivos: Lectura de CSV en /research para prospección.
 """
 
 def orquestar(prompt):
     if "ANTHROPIC_API_KEY" not in st.secrets:
         return "⚠️ Error: Configura la API Key de Anthropic en los Secrets de Streamlit."
-    client = anthropic.Anthropic(api_key=st.secrets["ANTHROPIC_API_KEY"])
-    sistema = f"Eres el CEO de Hutrit. Coordina estas habilidades: {MAPA_HUTRIT}. Eres un sistema operativo ejecutor."
-    response = client.messages.create(
-        model="claude-3-5-sonnet-20241022",
-        max_tokens=2000,
-        system=sistema,
-        messages=[{"role": "user", "content": prompt}]
-    )
-    return response.content[0].text
+    
+    try:
+        client = anthropic.Anthropic(api_key=st.secrets["ANTHROPIC_API_KEY"])
+        sistema = f"Eres el CEO de Hutrit. Coordina estas habilidades: {MAPA_HUTRIT}. Eres un sistema operativo ejecutor."
+        
+        # Uso de 'latest' para asegurar estabilidad y evitar BadRequestError
+        response = client.messages.create(
+            model="claude-3-5-sonnet-latest", 
+            max_tokens=2000,
+            system=sistema,
+            messages=[{"role": "user", "content": prompt}]
+        )
+        return response.content[0].text
+    except Exception as e:
+        return f"❌ Error en la orquestación: {str(e)}"
 
 def enviar_a_buffer(texto, redes):
-    # Webhook real de Make para Buffer
+    # Webhook de Make vinculado a Buffer
     WEBHOOK_URL = "https://hook.us2.make.com/eddmr643b21lxtqjri2e74gkrdgv0c7j"
     payload = {"contenido": texto, "plataformas": redes, "autor": "Adam - Hutrit OS"}
     try:
-        r = requests.post(WEBHOOK_URL, json=payload)
+        r = requests.post(WEBHOOK_URL, json=payload, timeout=10)
         return r.status_code == 200
     except:
         return False
@@ -66,11 +71,12 @@ with tab_chat:
     if "messages" not in st.session_state: st.session_state.messages = []
     for m in st.session_state.messages:
         with st.chat_message(m["role"]): st.markdown(m["content"])
+    
     if p := st.chat_input("¿Qué misión ejecutamos hoy, Adam?"):
         st.session_state.messages.append({"role": "user", "content": p})
         with st.chat_message("user"): st.markdown(p)
         with st.chat_message("assistant"):
-            with st.spinner("Hutrit pensando..."):
+            with st.spinner("Hutrit analizando tendencias..."):
                 r = orquestar(p)
                 st.markdown(r)
                 st.session_state.messages.append({"role": "assistant", "content": r})
@@ -80,7 +86,7 @@ with tab_mkt:
     st.subheader("Publicación Directa a Redes Sociales")
     col_a, col_b = st.columns([2, 1])
     with col_a:
-        post_content = st.text_area("Copy del Post:", height=200, placeholder="Pega aquí el contenido generado...")
+        post_content = st.text_area("Copy del Post:", height=200, placeholder="Pega aquí el contenido...")
     with col_b:
         redes_sel = st.multiselect("Canales:", ["LinkedIn", "Instagram", "TikTok", "Facebook"])
         if st.button("🚀 ENVIAR A BUFFER"):
@@ -90,22 +96,18 @@ with tab_mkt:
                 else:
                     st.error("❌ Error de conexión con Make.")
             else:
-                st.warning("⚠️ Escribe el copy y selecciona redes.")
-    st.markdown("---")
-    if st.button("📊 Ejecutar Auditoría SEO (/market-seo)"):
-        st.info("Agente SEO activado. Ingresa la URL en el orquestador.")
+                st.warning("Escribe el copy y selecciona redes.")
 
-# --- TAB 3: VENTAS Y EMAILS ---
+# --- TAB 3: VENTAS (RESEND) ---
 with tab_ventas:
-    st.subheader("Prospección y Envío de Emails (Resend)")
+    st.subheader("Envío de Emails Personalizados")
     path_csv = Path("research/seguimiento_hutrit.csv")
     if path_csv.exists():
         df = pd.read_csv(path_csv)
         st.dataframe(df, use_container_width=True)
-        st.markdown("---")
-        empresa = st.selectbox("Empresa para contactar:", df['Empresa'].tolist())
+        empresa = st.selectbox("Selecciona empresa:", df['Empresa'].tolist())
         datos_c = df[df['Empresa'] == empresa].iloc[0]
-        if st.button(f"📧 ENVIAR PROPUESTA A {empresa}"):
+        if st.button(f"📧 ENVIAR CORREO A {empresa}"):
             if pd.notnull(datos_c['Email']):
                 try:
                     resend.api_key = st.secrets["RESEND_API_KEY"]
@@ -113,31 +115,25 @@ with tab_ventas:
                         "from": "Adam de Hutrit <onboarding@resend.dev>",
                         "to": [datos_c['Email']],
                         "subject": f"Propuesta Estratégica para {empresa}",
-                        "html": f"<h3>Hola {empresa},</h3><p>Vimos su perfil y tenemos una solución de marketing...</p>"
+                        "html": f"<p>Hola {empresa}, basándonos en las tendencias actuales...</p>"
                     })
-                    st.success(f"Correo enviado a {datos_c['Email']}")
-                except Exception as e:
-                    st.error(f"Error en Resend: {e}")
+                    st.success(f"Enviado a {datos_c['Email']}")
+                except Exception as e: st.error(f"Error: {e}")
             else:
-                st.warning("⚠️ No hay email registrado.")
+                st.warning("⚠️ Sin email.")
     else:
-        st.info("Sube el archivo /research/seguimiento_hutrit.csv para usar esta pestaña.")
+        st.info("Falta el archivo de prospección en /research.")
 
 # --- TAB 4: DOCUMENTOS ---
 with tab_docs:
-    st.subheader("Gestión de Reportes")
-    todos_md = list(Path(".").rglob("*.md"))
-    if todos_md:
-        archivo_sel = st.selectbox("Selecciona reporte:", todos_md)
-        texto_md = archivo_sel.read_text(encoding="utf-8")
-        st.text_area("Vista previa:", texto_md, height=150)
-        c1, c2 = st.columns(2)
-        with c1: st.download_button("⬇️ Descargar .md", texto_md, file_name=archivo_sel.name)
-        with c2: st.download_button("⬇️ Descargar como .txt", texto_md, file_name=f"{archivo_sel.stem}.txt")
-    if st.button("🔄 Refrescar"): st.rerun()
+    st.subheader("Auditorías y Reportes")
+    reportes = list(Path(".").rglob("*.md"))
+    if reportes:
+        sel = st.selectbox("Archivo:", reportes)
+        st.download_button("⬇️ Descargar .txt", sel.read_text(encoding="utf-8"), file_name=f"{sel.stem}.txt")
 
 # --- TAB 5: CREATIVOS ---
 with tab_creativos:
-    st.subheader("Generación de Imágenes con IA")
-    if st.button("🎨 Activar /social-creative-designer"):
-        st.info("Llamando a Nano Banana para crear el diseño...")
+    st.subheader("Inspiración de Carpeta /social")
+    if st.button("🎨 Generar Concepto con Nano Banana"):
+        st.info("Analizando creativos previos para mantener el estilo Hutrit...")
