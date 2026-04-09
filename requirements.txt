@@ -3,3 +3,4 @@ anthropic
 apify-client
 python-dotenv
 requests
+resend
