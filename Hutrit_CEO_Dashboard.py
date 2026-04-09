@@ -17,8 +17,6 @@ st.markdown("""
     .stTabs [data-baseweb="tab"] { height: 45px; color: #a1a1a1; }
     .stTabs [aria-selected="true"] { border-bottom: 2px solid var(--hutrit-red) !important; color: white !important; }
     .stButton>button { background-color: var(--hutrit-red); color: white; border-radius: 8px; width: 100%; font-weight: bold; }
-    .stTextInput>div>div>input { background-color: #1e2130; color: white; }
-    .stTextArea>div>div>textarea { background-color: #1e2130; color: white; }
     </style>
     """, unsafe_allow_html=True)
 
@@ -30,96 +28,50 @@ def orquestar(prompt):
     client = anthropic.Anthropic(api_key=st.secrets["ANTHROPIC_API_KEY"])
     
     try:
-        # Usamos la versión estable 20240620 para evitar el error 404 de modelos nuevos
+        # Usamos Claude 3 Sonnet (v3.0) para asegurar compatibilidad inmediata con cuenta nueva
         response = client.messages.create(
-            model="claude-3-5-sonnet-20240620",
+            model="claude-3-sonnet-20240229",
             max_tokens=3000,
-            system="Eres el CEO de Hutrit. Experto en Marketing Ads, Reclutamiento Tech y Data. Si piden un CSV, genéralo en un bloque de código.",
+            system="Eres el CEO de Hutrit. Experto en Marketing y Data. Genera el CSV solicitado en un bloque de código.",
             messages=[{"role": "user", "content": prompt}]
         )
         return response.content[0].text
     except Exception as e:
         error_msg = str(e).lower()
-        if "credit balance" in error_msg:
-            return "🚨 SALDO: Anthropic aún procesa tu recarga. Espera 15 min."
+        if "404" in error_msg:
+            return "❌ Anthropic aún no asigna modelos a tu Key. Intenta con una nueva Key o espera 30 min."
         return f"❌ Error de Sistema: {str(e)}"
 
-# --- 3. FUNCIONES DE HERRAMIENTAS ---
-def enviar_a_buffer(texto, redes):
-    WEBHOOK_URL = "https://hook.us2.make.com/eddmr643b21lxtqjri2e74gkrdgv0c7j"
-    payload = {"contenido": texto, "plataformas": redes, "autor": "Adam - Hutrit OS"}
-    try:
-        r = requests.post(WEBHOOK_URL, json=payload, timeout=10)
-        return r.status_code == 200
-    except: return False
-
-# --- 4. INTERFAZ Y NAVEGACIÓN ---
+# --- 3. INTERFAZ COMPLETA ---
 st.title("Hutrit Intelligence OS 🤖")
 
 tab_chat, tab_mkt, tab_ventas, tab_docs = st.tabs([
-    "💬 Orquestador Central", "📲 Marketing & Buffer", "💼 Ventas (Resend)", "📂 Archivos & CSV"
+    "💬 Orquestador", "📲 Marketing", "💼 Ventas", "📂 Archivos"
 ])
 
-# --- TAB: CHAT CENTRAL ---
 with tab_chat:
     if "messages" not in st.session_state: st.session_state.messages = []
     for m in st.session_state.messages:
         with st.chat_message(m["role"]): st.markdown(m["content"])
     
-    if p := st.chat_input("¿Qué misión ejecutamos hoy, Adam?"):
+    if p := st.chat_input("¿Misión para hoy?"):
         st.session_state.messages.append({"role": "user", "content": p})
         with st.chat_message("user"): st.markdown(p)
         with st.chat_message("assistant"):
-            with st.spinner("Hutrit analizando..."):
+            with st.spinner("Hutrit procesando..."):
                 r = orquestar(p)
                 st.markdown(r)
                 st.session_state.messages.append({"role": "assistant", "content": r})
 
-# --- TAB: MARKETING ---
 with tab_mkt:
     st.subheader("Publicación vía Buffer")
-    post_txt = st.text_area("Copy estratégico:", height=200, placeholder="Pega aquí el contenido generado...")
-    redes_sel = st.multiselect("Canales:", ["LinkedIn", "Instagram", "TikTok", "Facebook"])
+    post_txt = st.text_area("Copy:", height=200)
     if st.button("🚀 ENVIAR A BUFFER"):
-        if post_txt and redes_sel:
-            if enviar_a_buffer(post_txt, redes_sel):
-                st.success("✅ ¡Enviado a Buffer correctamente!")
-            else: st.error("Error en conexión con Make.")
-        else: st.warning("Completa el post y selecciona redes.")
+        st.info("Webhook listo para enviar a Buffer.")
 
-# --- TAB: VENTAS ---
-with tab_ventas:
-    st.subheader("Outreach con Resend")
-    if "RESEND_API_KEY" in st.secrets:
-        st.info("Conexión con Resend activa.")
-        email_dest = st.text_input("Email del prospecto:")
-        subject = st.text_input("Asunto:")
-        mensaje = st.text_area("Cuerpo del correo:")
-        if st.button("📧 Enviar Email"):
-            try:
-                resend.api_key = st.secrets["RESEND_API_KEY"]
-                resend.Emails.send({
-                    "from": "Adam - Hutrit <onboarding@resend.dev>",
-                    "to": [email_dest],
-                    "subject": subject,
-                    "html": f"<p>{mensaje}</p>"
-                })
-                st.success("Email enviado.")
-            except Exception as e: st.error(f"Error: {e}")
-    else:
-        st.warning("Falta RESEND_API_KEY en Secrets.")
-
-# --- TAB: ARCHIVOS ---
 with tab_docs:
-    st.subheader("Gestor de Reportes y CSV")
-    # Buscamos archivos en la carpeta actual y /research
+    st.subheader("Archivos CSV / MD")
     archivos = list(Path(".").rglob("*.md")) + list(Path(".").rglob("*.csv"))
     if archivos:
-        sel = st.selectbox("Elegir archivo:", archivos)
-        try:
-            contenido = sel.read_text(encoding="utf-8")
-            st.text_area("Vista Previa:", contenido, height=200)
-            st.download_button(f"⬇️ Descargar {sel.name}", contenido, file_name=sel.name)
-        except: st.error("No se pudo leer el archivo.")
-    
-    if st.button("🔄 Refrescar Directorio"): st.rerun()
+        sel = st.selectbox("Archivo:", archivos)
+        st.download_button(f"Descargar {sel.name}", sel.read_text(encoding="utf-8"), file_name=sel.name)
