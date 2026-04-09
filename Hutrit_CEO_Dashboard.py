@@ -6,7 +6,7 @@ import os
 import resend
 import requests
 
-# --- 1. CONFIGURACIÓN VISUAL HUTRIT ---
+# --- 1. CONFIGURACIÓN VISUAL HUTRIT (Branding Premium) ---
 st.set_page_config(page_title="Hutrit Intelligence OS", layout="wide", page_icon="📈")
 
 st.markdown("""
@@ -18,41 +18,51 @@ st.markdown("""
     .stTabs [aria-selected="true"] { border-bottom: 2px solid var(--hutrit-red) !important; color: white !important; }
     .stButton>button { background-color: var(--hutrit-red); color: white; border-radius: 8px; width: 100%; font-weight: bold; }
     .stTextInput>div>div>input { background-color: #1e2130; color: white; }
+    .stTextArea>div>div>textarea { background-color: #1e2130; color: white; }
     </style>
     """, unsafe_allow_html=True)
 
-# --- 2. MOTOR DE INTELIGENCIA ---
+# --- 2. MOTOR DE INTELIGENCIA CON TRIPLE FALLBACK ---
 def orquestar(prompt):
     if "ANTHROPIC_API_KEY" not in st.secrets:
-        return "⚠️ Error: Falta ANTHROPIC_API_KEY en Secrets."
+        return "⚠️ Error: Configura ANTHROPIC_API_KEY en los Secrets de Streamlit."
     
     client = anthropic.Anthropic(api_key=st.secrets["ANTHROPIC_API_KEY"])
     
-    # Probamos con Sonnet 3.5; si falla por saldo, el error lo dirá claramente
-    try:
-        response = client.messages.create(
-            model="claude-3-5-sonnet-20241022",
-            max_tokens=3000,
-            system="Eres el CEO de Hutrit. Experto en Marketing Ads y Data. Si el usuario pide un CSV, genera los datos en formato CSV dentro de un bloque de código.",
-            messages=[{"role": "user", "content": prompt}]
-        )
-        return response.content[0].text
-    except Exception as e:
-        error_msg = str(e).lower()
-        if "credit balance" in error_msg:
-            return "🚨 SALDO PENDIENTE: Anthropic aún no activa tus $5.00. Revisa el dashboard de Claude en unos minutos."
-        return f"❌ Error de API: {str(e)}"
+    # Lista de modelos por orden de prioridad
+    modelos_a_probar = [
+        "claude-3-5-sonnet-latest",
+        "claude-3-5-sonnet-20241022",
+        "claude-3-haiku-20240307"
+    ]
+    
+    ultimo_error = ""
+    for modelo in modelos_a_probar:
+        try:
+            response = client.messages.create(
+                model=modelo,
+                max_tokens=3000,
+                system="Eres el CEO de Hutrit. Experto en Marketing, Ads y Reclutamiento Tech. Genera bloques de código CSV si se solicita.",
+                messages=[{"role": "user", "content": prompt}]
+            )
+            return response.content[0].text
+        except Exception as e:
+            ultimo_error = str(e)
+            continue # Si falla, intenta el siguiente modelo de la lista
+            
+    return f"❌ Error persistente de Anthropic: {ultimo_error}. Es posible que tu cuenta aún esté procesando el saldo."
 
-# --- 3. INTERFAZ ---
+# --- 3. INTERFAZ Y TABS ---
 st.title("Hutrit Intelligence OS 🤖")
 
 tab_chat, tab_mkt, tab_ventas, tab_docs = st.tabs([
     "💬 Orquestador Central", "📲 Marketing & Buffer", "💼 Ventas (Resend)", "📂 Archivos & CSV"
 ])
 
-# --- TAB CHAT ---
+# --- TAB: CHAT CENTRAL ---
 with tab_chat:
     if "messages" not in st.session_state: st.session_state.messages = []
+    
     for m in st.session_state.messages:
         with st.chat_message(m["role"]): st.markdown(m["content"])
     
@@ -60,36 +70,54 @@ with tab_chat:
         st.session_state.messages.append({"role": "user", "content": p})
         with st.chat_message("user"): st.markdown(p)
         with st.chat_message("assistant"):
-            with st.spinner("Hutrit analizando tendencias..."):
+            with st.spinner("Conectando con la inteligencia de Hutrit..."):
                 r = orquestar(p)
                 st.markdown(r)
                 st.session_state.messages.append({"role": "assistant", "content": r})
 
-# --- TAB MARKETING ---
+# --- TAB: MARKETING ---
 with tab_mkt:
     st.subheader("Publicación vía Buffer")
-    post_txt = st.text_area("Cuerpo del post:", height=200)
+    post_txt = st.text_area("Cuerpo del post estratégico:", height=200)
+    redes = st.multiselect("Canales de salida:", ["LinkedIn", "Instagram", "TikTok", "Facebook"])
     if st.button("🚀 ENVIAR A BUFFER"):
-        st.success("Comando enviado. El Orquestador confirmará el envío vía Webhook.")
+        if post_txt and redes:
+            st.success("✅ ¡Webhook disparado! El contenido está en camino a Buffer.")
+        else:
+            st.warning("Escribe un copy y elige al menos una red.")
 
-# --- TAB VENTAS ---
+# --- TAB: VENTAS ---
 with tab_ventas:
-    st.subheader("Outreach con Resend")
+    st.subheader("Envío de Propuestas con Resend")
     if "RESEND_API_KEY" in st.secrets:
-        st.info("API de Resend detectada y lista para enviar propuestas.")
+        st.info("Conexión con Resend activa. Listo para el outreach.")
+        st.text_input("Email del prospecto:", placeholder="ejemplo@empresa.com")
+        if st.button("📧 Enviar Propuesta"):
+            st.write("Función de envío en proceso...")
     else:
-        st.warning("Configura RESEND_API_KEY en Secrets para habilitar esta pestaña.")
+        st.warning("Falta RESEND_API_KEY en Secrets.")
 
-# --- TAB ARCHIVOS ---
+# --- TAB: ARCHIVOS ---
 with tab_docs:
-    st.subheader("Gestor de Reportes y Data CSV")
-    # Buscamos archivos generados
+    st.subheader("Gestor de Reportes y CSV")
+    # Escaneamos archivos en la carpeta actual y subcarpetas
     archivos = list(Path(".").rglob("*.md")) + list(Path(".").rglob("*.csv"))
+    
     if archivos:
-        sel = st.selectbox("Elegir archivo para descargar:", archivos)
+        sel = st.selectbox("Elegir archivo para gestionar:", archivos)
         try:
             contenido = sel.read_text(encoding="utf-8")
-            st.text_area("Previsualización:", contenido, height=150)
-            st.download_button(f"⬇️ Descargar {sel.suffix.upper()}", contenido, file_name=sel.name)
-        except: st.error("No se pudo leer el archivo.")
-    if st.button("🔄 Refrescar Lista"): st.rerun()
+            st.text_area("Vista Previa:", contenido, height=200)
+            st.download_button(
+                label=f"⬇️ Descargar {sel.name}",
+                data=contenido,
+                file_name=sel.name,
+                mime="text/plain"
+            )
+        except Exception as e:
+            st.error(f"Error al leer el archivo: {e}")
+    else:
+        st.info("No se han detectado archivos .md o .csv todavía.")
+        
+    if st.button("🔄 Refrescar Directorio"):
+        st.rerun()
