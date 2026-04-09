@@ -1,10 +1,19 @@
 import os
+import re
 import requests
 import json
 import csv
 from pathlib import Path
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
+
+EMAIL_RE = re.compile(r'[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}')
+EMAIL_SKIP_DOMAINS = {
+    "sentry.io", "w3.org", "schema.org", "google.com", "facebook.com",
+    "twitter.com", "linkedin.com", "instagram.com", "youtube.com",
+    "example.com", "email.com", "domain.com", "empresa.com",
+    "tu-correo.com", "correo.com", "wixpress.com", "squarespace.com"
+}
 
 load_dotenv(dotenv_path=Path(__file__).resolve().parent.parent.parent.parent / ".env")
 
@@ -79,6 +88,49 @@ def scrape_web(url):
     return resultado
 
 
+def extraer_emails(url, html_base="", soup_base=None):
+    """
+    Extrae emails reales del sitio web: homepage + /contacto + /contact.
+    Filtra dominios de ruido y retorna hasta 3 emails limpios.
+    """
+    emails = set()
+    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
+
+    def _parse(html, soup):
+        # mailto links primero (más fiables)
+        for a in soup.find_all("a", href=True):
+            if "mailto:" in a["href"]:
+                e = a["href"].replace("mailto:", "").split("?")[0].strip().lower()
+                if "@" in e:
+                    emails.add(e)
+        # regex en todo el texto
+        for e in EMAIL_RE.findall(html):
+            domain = e.split("@")[1].lower()
+            if (domain not in EMAIL_SKIP_DOMAINS
+                    and not domain.endswith(".png")
+                    and not domain.endswith(".js")
+                    and not domain.endswith(".css")
+                    and len(e) < 60):
+                emails.add(e.lower())
+
+    if html_base and soup_base:
+        _parse(html_base, soup_base)
+
+    if not url or url == "N/A":
+        pass
+    else:
+        for path in ["/contacto", "/contact", "/contactanos", "/sobre-nosotros", "/acerca"]:
+            try:
+                r = requests.get(url.rstrip("/") + path, timeout=5, headers=headers)
+                if r.status_code == 200:
+                    _parse(r.text, BeautifulSoup(r.text, "html.parser"))
+            except Exception:
+                pass
+
+    clean = sorted({e for e in emails if "." in e.split("@")[1]})
+    return ", ".join(clean[:3]) if clean else "No encontrado"
+
+
 # ─── Google Places ───────────────────────────────────────────────────────────
 
 def obtener_detalle_place(place_id, api_key):
@@ -100,7 +152,7 @@ def obtener_detalle_place(place_id, api_key):
 
 COLUMNAS = [
     "Empresa", "Ciudad", "Nicho", "Rating", "Estrategia",
-    "Web", "Telefono", "Direccion",
+    "Web", "Email", "Telefono", "Direccion",
     "Meta_Pixel", "Google_Ads_Tag", "LinkedIn_Empresa",
     "Meta_Descripcion", "Diagnostico_Web"
 ]
@@ -165,6 +217,10 @@ def ejecutar_agente_hutrit(ciudad="Madrid", nicho="Agencia de Marketing"):
         if scrape["linkedin_url"] != "N/A":
             print(f"   LinkedIn: {scrape['linkedin_url']}")
 
+        # Email extraction (reutiliza el HTML ya descargado por scrape_web)
+        email = extraer_emails(web)
+        print(f"   Email: {email}")
+
         datos = {
             "Empresa": nombre,
             "Ciudad": ciudad,
@@ -172,10 +228,11 @@ def ejecutar_agente_hutrit(ciudad="Madrid", nicho="Agencia de Marketing"):
             "Rating": rating,
             "Estrategia": estrategia,
             "Web": web,
+            "Email": email,
             "Telefono": telefono,
             "Direccion": direccion,
-            "Meta_Pixel": "Sí" if scrape["meta_pixel"] else "No",
-            "Google_Ads_Tag": "Sí" if scrape["google_ads_tag"] else "No",
+            "Meta_Pixel": "Si" if scrape["meta_pixel"] else "No",
+            "Google_Ads_Tag": "Si" if scrape["google_ads_tag"] else "No",
             "LinkedIn_Empresa": scrape["linkedin_url"],
             "Meta_Descripcion": scrape["meta_descripcion"],
             "Diagnostico_Web": scrape["diagnostico"]
