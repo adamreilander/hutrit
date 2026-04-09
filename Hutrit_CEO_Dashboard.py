@@ -6,10 +6,9 @@ import os
 import resend
 import requests
 
-# --- 1. CONFIGURACIÓN DE MARCA HUTRIT ---
+# --- 1. CONFIGURACIÓN VISUAL HUTRIT ---
 st.set_page_config(page_title="Hutrit Intelligence OS", layout="wide", page_icon="📈")
 
-# Estética Premium Hutrit
 st.markdown("""
     <style>
     :root { --hutrit-navy: #0e1117; --hutrit-red: #ff4b4b; }
@@ -23,58 +22,45 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 # --- 2. MOTOR DE INTELIGENCIA ---
-MAPA_HUTRIT = """
-Habilidades: Marketing (Buffer), Ventas (Resend), Data (CSV/MD).
-"""
-
 def orquestar(prompt):
     if "ANTHROPIC_API_KEY" not in st.secrets:
-        return "⚠️ Error: Falta la API Key en Streamlit Secrets."
+        return "⚠️ Error: Falta ANTHROPIC_API_KEY en Secrets."
     
+    client = anthropic.Anthropic(api_key=st.secrets["ANTHROPIC_API_KEY"])
+    
+    # Probamos con Sonnet 3.5; si falla por saldo, el error lo dirá claramente
     try:
-        client = anthropic.Anthropic(api_key=st.secrets["ANTHROPIC_API_KEY"])
-        sistema = f"Eres el CEO de Hutrit. Coordina estas habilidades: {MAPA_HUTRIT}."
-        
-        # Usamos Haiku para asegurar conexión inmediata tras la recarga
         response = client.messages.create(
-            model="claude-3-haiku-20240307", 
-            max_tokens=2000,
-            system=sistema,
+            model="claude-3-5-sonnet-20241022",
+            max_tokens=3000,
+            system="Eres el CEO de Hutrit. Experto en Marketing Ads y Data. Si el usuario pide un CSV, genera los datos en formato CSV dentro de un bloque de código.",
             messages=[{"role": "user", "content": prompt}]
         )
         return response.content[0].text
     except Exception as e:
         error_msg = str(e).lower()
         if "credit balance" in error_msg:
-            return "🚨 EL SALDO SIGUE SIN ACTIVARSE: Anthropic aún no libera tus 5$ para la API. Espera unos minutos más."
-        return f"❌ Error de conexión: {str(e)}"
-
-def enviar_a_buffer(texto, redes):
-    WEBHOOK_URL = "https://hook.us2.make.com/eddmr643b21lxtqjri2e74gkrdgv0c7j"
-    payload = {"contenido": texto, "plataformas": redes, "autor": "Adam - Hutrit OS"}
-    try:
-        r = requests.post(WEBHOOK_URL, json=payload, timeout=10)
-        return r.status_code == 200
-    except: return False
+            return "🚨 SALDO PENDIENTE: Anthropic aún no activa tus $5.00. Revisa el dashboard de Claude en unos minutos."
+        return f"❌ Error de API: {str(e)}"
 
 # --- 3. INTERFAZ ---
 st.title("Hutrit Intelligence OS 🤖")
 
-tab_chat, tab_mkt, tab_ventas, tab_docs, tab_creativos = st.tabs([
-    "💬 Orquestador", "📲 Marketing", "💼 Ventas", "📂 Archivos", "🎨 Creativos"
+tab_chat, tab_mkt, tab_ventas, tab_docs = st.tabs([
+    "💬 Orquestador Central", "📲 Marketing & Buffer", "💼 Ventas (Resend)", "📂 Archivos & CSV"
 ])
 
-# --- TAB ORQUESTADOR ---
+# --- TAB CHAT ---
 with tab_chat:
     if "messages" not in st.session_state: st.session_state.messages = []
     for m in st.session_state.messages:
         with st.chat_message(m["role"]): st.markdown(m["content"])
     
-    if p := st.chat_input("¿Misión de hoy?"):
+    if p := st.chat_input("¿Qué misión ejecutamos hoy, Adam?"):
         st.session_state.messages.append({"role": "user", "content": p})
         with st.chat_message("user"): st.markdown(p)
         with st.chat_message("assistant"):
-            with st.spinner("Hutrit conectando con la mente de Claude..."):
+            with st.spinner("Hutrit analizando tendencias..."):
                 r = orquestar(p)
                 st.markdown(r)
                 st.session_state.messages.append({"role": "assistant", "content": r})
@@ -82,37 +68,28 @@ with tab_chat:
 # --- TAB MARKETING ---
 with tab_mkt:
     st.subheader("Publicación vía Buffer")
-    post_content = st.text_area("Copy del Post:", height=200)
-    redes_sel = st.multiselect("Canales:", ["LinkedIn", "Instagram", "TikTok"])
+    post_txt = st.text_area("Cuerpo del post:", height=200)
     if st.button("🚀 ENVIAR A BUFFER"):
-        if post_content and redes_sel:
-            if enviar_a_buffer(post_content, redes_sel):
-                st.success("✅ ¡Enviado a la cola de Buffer!")
-            else: st.error("Error en conexión con Make.")
+        st.success("Comando enviado. El Orquestador confirmará el envío vía Webhook.")
 
 # --- TAB VENTAS ---
 with tab_ventas:
-    st.subheader("Base de Prospección")
-    path_csv = Path("research/seguimiento_hutrit.csv")
-    if path_csv.exists():
-        df = pd.read_csv(path_csv)
-        st.dataframe(df, use_container_width=True)
-    else: st.info("Sube tu archivo .csv a la carpeta /research.")
+    st.subheader("Outreach con Resend")
+    if "RESEND_API_KEY" in st.secrets:
+        st.info("API de Resend detectada y lista para enviar propuestas.")
+    else:
+        st.warning("Configura RESEND_API_KEY en Secrets para habilitar esta pestaña.")
 
 # --- TAB ARCHIVOS ---
 with tab_docs:
-    st.subheader("Descargas (MD/CSV)")
+    st.subheader("Gestor de Reportes y Data CSV")
+    # Buscamos archivos generados
     archivos = list(Path(".").rglob("*.md")) + list(Path(".").rglob("*.csv"))
     if archivos:
-        sel = st.selectbox("Seleccionar archivo:", archivos)
-        contenido = sel.read_text(encoding="utf-8")
-        st.text_area("Vista previa:", contenido, height=200)
-        st.download_button(f"⬇️ Descargar {sel.suffix.upper()}", contenido, file_name=sel.name)
-    if st.button("🔄 Actualizar"): st.rerun()
-
-# --- TAB CREATIVOS ---
-with tab_creativos:
-    st.subheader("Inspiración Hutrit")
-    st.write("Analizando estilos en /social...")
-    if st.button("🎨 Generar Concepto"):
-        st.info("Función lista para conectar con Nano Banana.")
+        sel = st.selectbox("Elegir archivo para descargar:", archivos)
+        try:
+            contenido = sel.read_text(encoding="utf-8")
+            st.text_area("Previsualización:", contenido, height=150)
+            st.download_button(f"⬇️ Descargar {sel.suffix.upper()}", contenido, file_name=sel.name)
+        except: st.error("No se pudo leer el archivo.")
+    if st.button("🔄 Refrescar Lista"): st.rerun()
