@@ -6,8 +6,15 @@
         "nanobanana-mcp-server@latest"
       ],
       "env": {
-        "GEMINI_API_KEY": "AIzaSyDu-JNPN2rgEylDTlKrsBeYj8D45XbiKog",
+        "GEMINI_API_KEY": "AIzaSyB-dzPO7J1BwQKjAVJNBgjZIrVugMCWLXM",
         "IMAGE_OUTPUT_DIR": "C:\\Users\\Admin\\Pictures\\nanobanana"
+      }
+    },
+    "nano-banana": {
+      "command": "nano-banana-mcp",
+      "env": {
+        "GEMINI_API_KEY": "AIzaSyB-dzPO7J1BwQKjAVJNBgjZIrVugMCWLXM",
+        "IMAGE_OUTPUT_DIR": "C:\\Users\\Admin\\Documents\\Hutrit\\social"
       }
     }
   }
