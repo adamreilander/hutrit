@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "nano-banana": {
+      "command": "nano-banana-mcp",
+      "env": {
+        "GEMINI_API_KEY": "TU_GEMINI_API_KEY_AQUI",
+        "IMAGE_OUTPUT_DIR": "RUTA_ABSOLUTA_A_TU_CARPETA_SOCIAL"
+      }
+    }
+  }
+}
